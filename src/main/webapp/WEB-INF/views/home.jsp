@@ -8,6 +8,9 @@
 <h1>
 	Hello world!  
 </h1>
+<h1>
+	Hi!
+</h1>
 
 <P>  Server Test 2Team Inc. </P>
 </body>
