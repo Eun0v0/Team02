@@ -94,7 +94,7 @@ public class PSeoulDBHandle {
 				pSeoulObj.put("wmSixty", wmSixty);
 				pSeoulObj.put("wSeventy", wSeventy);
 				
-				pSeoulArr.add( pSeoulObj );
+				pSeoulArr.add(pSeoulObj);
 			}
 			rs.close();
 			return pSeoulArr.toJSONString();

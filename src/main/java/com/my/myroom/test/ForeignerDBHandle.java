@@ -21,7 +21,7 @@ public class ForeignerDBHandle {
 	
 	public String makeJson(){
 		JSONArray foreignerArr = new JSONArray();
-		String sql="select * from foreiner";
+		String sql="select * from foreigner";
 		ResultSet rs = null;
 		
 		try {
@@ -31,12 +31,20 @@ public class ForeignerDBHandle {
 			
 			while(rs.next()){
 				int dongCode = rs.getInt("dongcode");
+				int total = rs.getInt("total");
+				int chineses = rs.getInt("chineses");
+				int notChinese = rs.getInt("notchinese");
+				int score = rs.getInt("score");
 				
 				JSONObject foreignerObj = new JSONObject();
 			
 				foreignerObj.put("dongCode", dongCode);
+				foreignerObj.put("total", total);
+				foreignerObj.put("chineses", chineses);
+				foreignerObj.put("notChineses", notChinese);
+				foreignerObj.put("score", score);
 				
-				foreignerArr.add( foreignerObj );
+				foreignerArr.add(foreignerObj);
 			}
 			rs.close();
 			return foreignerArr.toJSONString();
