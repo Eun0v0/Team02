@@ -21,7 +21,7 @@ public class SearchLogDBHandle {
 	PreparedStatement pstmt;
 
 	public String makeJson() {
-		JSONArray searchingArr = new JSONArray();
+		JSONArray searchLogArr = new JSONArray();
 		String sql = "select * from searchlog";
 		ResultSet rs = null;
 
@@ -35,30 +35,25 @@ public class SearchLogDBHandle {
 				String sex = rs.getString("sex");
 				int age = rs.getInt("age");
 				Date searchDate = rs.getDate("searchDate");
-				int air = rs.getInt("air");
-				int noise = rs.getInt("noise");
-				int criminal = rs.getInt("criminal");
-				int foreigner = rs.getInt("foreigner");
-				int wSafeZone = rs.getInt("safezone");
-				int traffic = rs.getInt("taffic");
+				String gu = rs.getString("gu");
+				String dong = rs.getString("dong");
+				String searchOption = rs.getString("searchOption");
+				
 
-				JSONObject searchingObj = new JSONObject();
+				JSONObject searchLogObj = new JSONObject();
 
-				searchingObj.put("id", id);
-				searchingObj.put("sex", sex);
-				searchingObj.put("age", age);
-				searchingObj.put("searchDate", searchDate);
-				searchingObj.put("air", air);
-				searchingObj.put("noise", noise);
-				searchingObj.put("criminal", criminal);
-				searchingObj.put("foreigner", foreigner);
-				searchingObj.put("wSafeZone", wSafeZone);
-				searchingObj.put("traffic", traffic);
+				searchLogObj.put("id", id);
+				searchLogObj.put("sex", sex);
+				searchLogObj.put("age", age);
+				searchLogObj.put("searchDate", searchDate);
+				searchLogObj.put("gu", gu);
+				searchLogObj.put("dong", dong);
+				searchLogObj.put("searchOption", searchOption);
 
-				searchingArr.add(searchingObj);
+				searchLogArr.add(searchLogObj);
 			}
 			rs.close();
-			return searchingArr.toJSONString();
+			return searchLogArr.toJSONString();
 
 		} catch (Exception ex) {
 			return "Error: " + ex.getStackTrace();
