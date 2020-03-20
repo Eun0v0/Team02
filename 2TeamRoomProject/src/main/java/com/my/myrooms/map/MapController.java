@@ -39,6 +39,21 @@ public class MapController {
 		return "index";
 	}
 	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Locale locale, Model model) {
+		log.info("login");
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "login";
+	}
+	
+	
 	@RequestMapping(value = "/mainMap", method = RequestMethod.GET)
 	public String mainMap(Locale locale, Model model) {
 		//log.info("Welcome home! The client locale is {}.", locale);

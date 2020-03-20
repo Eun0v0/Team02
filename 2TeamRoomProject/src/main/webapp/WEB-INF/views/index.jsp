@@ -252,8 +252,7 @@
 							<li><a href="#"><i class="icon_clock_alt"></i> Timeline</a>
 							</li>
 							<li><a href="#"><i class="icon_chat_alt"></i> Chats</a></li>
-							<li><a href="login.html"><i class="icon_key_alt"></i>
-									Log Out</a></li>
+							<li><a href="login"><i class="icon_key_alt"></i> Log Out</a></li>
 							<li><a href="documentation.html"><i class="icon_key_alt"></i>
 									Documentation</a></li>
 							<li><a href="documentation.html"><i class="icon_key_alt"></i>
@@ -412,6 +411,18 @@
 						</div>
 					</div>
 					<div class="col-md-3">
+						<form>
+							<label for="favors">옵션 선택 : </label> <br> <input
+								type="radio" name="favor" value="air">공기<br> <input
+								type="radio" name="favor" value="noise">소음 <br> <input
+								type="radio" name="favor" value="criminal">범죄<br> <input
+								type="radio" name="favor" value="foreigner">외국인<br>
+							<input type="radio" name="favor" value="safezone">여성귀가안심존<br>
+							<input type="radio" name="favor" value="traffic">교통사고
+							다발구역 <br> <input type="submit" value="확인">
+						</form>
+
+
 						<!-- List starts -->
 						<ul class="today-datas">
 							<!-- List #1 -->
@@ -878,8 +889,7 @@
 						<!--Project Activity end-->
 					</div>
 				</div>
-				<br>
-				<br>
+				<br> <br>
 
 				<div class="row">
 					<div class="col-md-6 portlets">
@@ -894,9 +904,7 @@
 								</div>
 
 							</div>
-							<br>
-							<br>
-							<br>
+							<br> <br> <br>
 							<div class="panel-body">
 								<!-- Widget content -->
 
@@ -1049,10 +1057,10 @@
 	<script src="resources/NiceAdmin/js/sparklines.js"></script>
 	<script src="resources/NiceAdmin/js/charts.js"></script>
 	<script src="resources/NiceAdmin/js/jquery.slimscroll.min.js"></script>
-	
+
 	<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5bcdac877b8e9d5df65dcdcba3c9c1e4"></script>
-	
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5bcdac877b8e9d5df65dcdcba3c9c1e4"></script>
+
 	<script>
       //knob
       $(function() {
