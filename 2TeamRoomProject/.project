@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<<<<<<< HEAD
-	<name>MyRoom</name>
-=======
-	<name>Team02</name>
->>>>>>> e0b5fc37a2823c926d7159c9d2c3c9f3ea4c5b35
+	<name>2TeamRoomProject</name>
 	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
-<<<<<<< HEAD
 		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
 			<arguments>
@@ -48,9 +43,5 @@
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
-=======
-	</buildSpec>
-	<natures>
->>>>>>> e0b5fc37a2823c926d7159c9d2c3c9f3ea4c5b35
 	</natures>
 </projectDescription>
