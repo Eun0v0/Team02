@@ -53,4 +53,35 @@ public class TrafficDBHandle {
 			return "Error: " + ex.getStackTrace();
 		}
 	}
+	
+	public String getLocation() {
+		JSONArray locArr = new JSONArray();
+		String sql="select latitude, longitude from traffic";
+		ResultSet rs = null;
+		
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();	
+			
+			while(rs.next()){
+				double latitude = rs.getDouble("latitude");
+				double longitude = rs.getDouble("longitude");
+				
+				JSONObject locObj = new JSONObject();
+			
+				locObj.put("latitude", latitude);
+				locObj.put("longitude", longitude);
+				
+				locArr.add(locObj);
+			}
+			rs.close();
+			System.out.println("size:" + locArr.size());
+			return locArr.toJSONString();
+			
+		}catch(Exception ex) {
+			return "Error: " + ex.getStackTrace();
+		}
+		
+	}
 }
