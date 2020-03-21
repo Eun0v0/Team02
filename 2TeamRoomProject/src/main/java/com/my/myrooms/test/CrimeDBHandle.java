@@ -54,7 +54,7 @@ public class CrimeDBHandle {
 	
 	public String getLocation() {
 		JSONArray locArr = new JSONArray();
-		String sql="select lati, logti from loccode l , crime c where l.gucode =c.gucode AND l.dongcode is NULL";
+		String sql="select lati, logti, score from loccode l , crime c where l.gucode =c.gucode AND l.dongcode is NULL";
 		ResultSet rs = null;
 		
 		try {
@@ -65,11 +65,13 @@ public class CrimeDBHandle {
 			while(rs.next()){
 				double latitude = rs.getDouble("lati");
 				double longitude = rs.getDouble("logti");
+				int score = rs.getInt("score");
 				
 				JSONObject locObj = new JSONObject();
 			
 				locObj.put("latitude", latitude);
 				locObj.put("longitude", longitude);
+				locObj.put("score", score);
 				
 				locArr.add(locObj);
 			}
