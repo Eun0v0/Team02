@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.my.myrooms.test.NoiseDBHandle;
 import com.my.myrooms.test.WSafeZoneDBHandle;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +25,9 @@ import lombok.extern.slf4j.Slf4j;
 public class MapController {
 	@Autowired
 	WSafeZoneDBHandle wSafeZoneDBHandle;
+	
+	@Autowired
+	NoiseDBHandle noiseDBHandle;
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(Locale locale, Model model) {
@@ -87,4 +91,44 @@ public class MapController {
 			e.printStackTrace();
 		};
 	}
+	
+	@RequestMapping(value = "/searchFavor", method = RequestMethod.GET)
+	public void searchFavor(HttpServletResponse response, HttpServletRequest request, Model model) {
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=UTF-8");
+		String favor = request.getParameter("favor");
+
+		
+		log.info("favor:" + favor + "\n");
+		try {
+			PrintWriter out = response.getWriter();
+			String jsonStr = null;
+			
+			if(favor.equals("finedust")) {
+				jsonStr = null;
+			} else if (favor.equals("noise")) {
+				log.info("get noise locations \n");
+				jsonStr = noiseDBHandle.getLocation();
+			} else if (favor.equals("criminal")) {
+				jsonStr = null;
+			} else if (favor.equals("foreigner")) {
+				jsonStr = null;
+			} else if (favor.equals("wsafezone")) {
+				jsonStr = wSafeZoneDBHandle.makeJson();
+			} else if (favor.equals("traffic")){
+				jsonStr = null;
+			} else {
+				jsonStr = null;
+			}
+			
+			if (jsonStr != null) {
+				out.print(jsonStr);
+				out.flush();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
+	}
+	
 }
