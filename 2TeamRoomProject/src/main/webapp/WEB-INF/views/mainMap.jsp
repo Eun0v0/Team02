@@ -1086,6 +1086,9 @@
       });
 
       var positions = [];//전체 정보
+      var selectOption = ""; //선택된 옵션 정보
+	  var map;      
+      
       
       $(function(){
     	  $.getJSON("showWSafeZone", recvJson)
@@ -1093,9 +1096,21 @@
       
       $(function(){
     	$("input:radio[name=favor]").click(function(){
-    		$.getJSON("searchFavor?favor=" + $("input[name=favor]:checked").val(), recvJson)
+    		selectOption = $("input[name=favor]:checked").val();
+    		$.getJSON("searchFavor?favor=" + selectOption, recvOptionJson)
     	})  
       })
+      
+      function recvOptionJson(data){
+    	  positions = []
+    	    $.each(data, (i, v) => {
+    	        var position = { score: 0, latlng: new kakao.maps.LatLng(0, 0) } //정보 하나씩
+    	        position.latlng = new kakao.maps.LatLng(v.latitude, v.longitude)
+    	        position.score = v.score;
+    	        positions.push(position)
+    	    })
+    	    makeMap() 
+      }
       
       function recvJson(data) {
   	    //console.log(data)
@@ -1125,13 +1140,26 @@
   			    var circle = new kakao.maps.Circle({
   				center : positions[i].latlng, // 원의 중심좌표 입니다 
   				radius : 200, // 미터 단위의 원의 반지름입니다 
-  				strokeWeight : 1, // 선의 두께입니다 
-  				strokeColor : '#FF6C6C', // 선의 색깔입니다
-  				strokeOpacity : 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-  				strokeStyle : 'dash', // 선의 스타일 입니다
+  				strokeWeight : 0, // 선의 두께입니다 
+  				//strokeColor : '#FF6C6C', // 선의 색깔입니다
+  				//strokeOpacity : 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+  				//strokeStyle : 'dash', // 선의 스타일 입니다
   				fillColor : '#FF6C6C', // 채우기 색깔입니다
   				fillOpacity : 0.7 // 채우기 불투명도 입니다   
    			 });
+              
+             if(selectOption=="noise"||selectOption=="criminal"||selectOption=="finedust"){
+            	 circle.setRadius(2000);
+            	 
+            	 if(1<=positions[i].score && positions[i].score <=3) //나쁨
+            	 	circle.setOptions({fillColor: '#CD3B3B'}); 
+            	 else if (4<=positions[i].score && positions[i].score <=7) //보통
+            		 circle.setOptions({fillColor: '#FF7171'}); 
+            	 else //좋음
+            		 circle.setOptions({fillColor: '#FFB9B9'});
+             }
+             
+             
    			// 지도에 원을 표시합니다 
    			 circle.setMap(map);
           }
