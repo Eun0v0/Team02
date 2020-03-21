@@ -405,22 +405,19 @@
 								</div>
 							</div>
 							<div class="panel-body-map">
-								<div id="map" style="width: 100%; height: 380px;"></div>
+								<div id="map" style="width: 100%; height: 450px;"></div>
 							</div>
 
 						</div>
 					</div>
 					<div class="col-md-3">
-						<form>
-							<label for="favors">옵션 선택 : </label> <br> <input
-								type="radio" name="favor" value="air">공기<br> <input
-								type="radio" name="favor" value="noise">소음 <br> <input
-								type="radio" name="favor" value="criminal">범죄<br> <input
-								type="radio" name="favor" value="foreigner">외국인<br>
-							<input type="radio" name="favor" value="safezone">여성귀가안심존<br>
-							<input type="radio" name="favor" value="traffic">교통사고
-							다발구역 <br> <input type="submit" value="확인">
-						</form>
+						<label for="favors">옵션 선택 : </label> <br> <input type="radio"
+							name="favor" value="finedust">공기<br> <input
+							type="radio" name="favor" value="noise">소음 <br> <input
+							type="radio" name="favor" value="criminal">범죄<br> <input
+							type="radio" name="favor" value="foreigner">외국인<br>
+						<input type="radio" name="favor" value="wsafezone">여성귀가안심존<br>
+						<input type="radio" name="favor" value="traffic">교통사고 다발구역
 
 
 						<!-- List starts -->
@@ -1094,8 +1091,15 @@
     	  $.getJSON("showWSafeZone", recvJson)
       })
       
+      $(function(){
+    	$("input:radio[name=favor]").click(function(){
+    		$.getJSON("searchFavor?favor=" + $("input[name=favor]:checked").val(), recvJson)
+    	})  
+      })
+      
       function recvJson(data) {
   	    //console.log(data)
+  	    positions = []
   	    $.each(data, (i, v) => {
   	        var position = { title: '', latlng: new kakao.maps.LatLng(0, 0) } //정보 하나씩
   	        position.latlng = new kakao.maps.LatLng(v.latitude, v.longitude)
@@ -1110,13 +1114,15 @@
               center: new kakao.maps.LatLng(37.5092956, 127.0554639)    // 지도의 중심좌표
               , level: 8    // 지도의 확대레벨
           };
-
-          // 지도를 생성
+		  // 지도를 생성
           map = new kakao.maps.Map(mapContainer, mapOption);
-
-          for (var i = 0; i < positions.length; i++) {
-           // 지도에 표시할 원을 생성합니다
-  			var circle = new kakao.maps.Circle({
+          drawCircles();
+      }
+		
+      function drawCircles(){
+    	  for (var i = 0; i < positions.length; i++) {
+              // 지도에 표시할 원을 생성합니다
+  			    var circle = new kakao.maps.Circle({
   				center : positions[i].latlng, // 원의 중심좌표 입니다 
   				radius : 200, // 미터 단위의 원의 반지름입니다 
   				strokeWeight : 1, // 선의 두께입니다 
@@ -1125,9 +1131,9 @@
   				strokeStyle : 'dash', // 선의 스타일 입니다
   				fillColor : '#FF6C6C', // 채우기 색깔입니다
   				fillOpacity : 0.7 // 채우기 불투명도 입니다   
-  			});
-  			// 지도에 원을 표시합니다 
-  			circle.setMap(map);
+   			 });
+   			// 지도에 원을 표시합니다 
+   			 circle.setMap(map);
           }
       }
     </script>
