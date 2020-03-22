@@ -67,6 +67,21 @@ public class MemberController {
 	public String loginFormFn(HttpServletResponse response, Model model) {
 		return "loginForm";
 	}
+	////
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginFn(HttpServletResponse response, Model model) {
+		return "NiceAdminLogin";
+	}
+	////
+	@RequestMapping(value = "/loginConfirm", method = RequestMethod.GET)
+	public String loginConfirm(HttpServletResponse response, Model model) {
+		String id = "dojw";
+		String pw = "qwe";
+		
+		
+		
+		return "mainMap";
+	}
 //	
 //	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)
 //	public String joinFormFn(HttpServletResponse response, Model model) {
