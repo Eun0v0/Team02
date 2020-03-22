@@ -51,4 +51,37 @@ public class FineDustDBHandle {
 			return "Error: " + ex.getStackTrace();
 		}
 	}
+	
+	public String getLocation() {
+		JSONArray locArr = new JSONArray();
+		String sql="select lati, logti, score from loccode l , finedust f where l.gucode =f.gucode AND l.dongcode is NULL";
+		ResultSet rs = null;
+		
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();	
+			
+			while(rs.next()){
+				double latitude = rs.getDouble("lati");
+				double longitude = rs.getDouble("logti");
+				int score = rs.getInt("score");
+				
+				JSONObject locObj = new JSONObject();
+			
+				locObj.put("latitude", latitude);
+				locObj.put("longitude", longitude);
+				locObj.put("score", score);
+
+				locArr.add(locObj);
+			}
+			rs.close();
+			System.out.println("size:" + locArr.size());
+			return locArr.toJSONString();
+			
+		}catch(Exception ex) {
+			return "Error: " + ex.getStackTrace();
+		}
+		
+	}
 }

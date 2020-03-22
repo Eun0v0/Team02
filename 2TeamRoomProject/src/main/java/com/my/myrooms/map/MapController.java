@@ -15,7 +15,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.my.myrooms.test.CrimeDBHandle;
+import com.my.myrooms.test.FineDustDBHandle;
+import com.my.myrooms.test.ForeignerDBHandle;
 import com.my.myrooms.test.NoiseDBHandle;
+import com.my.myrooms.test.TrafficDBHandle;
 import com.my.myrooms.test.WSafeZoneDBHandle;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +32,18 @@ public class MapController {
 	
 	@Autowired
 	NoiseDBHandle noiseDBHandle;
+	
+	@Autowired
+	FineDustDBHandle fineDustDBHandle;
+	
+	@Autowired
+	CrimeDBHandle crimeDBHandle;
+	
+	@Autowired
+	ForeignerDBHandle foreignerDBHandle;
+	
+	@Autowired
+	TrafficDBHandle trafficDBHandle;
 	
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index(Locale locale, Model model) {
@@ -105,18 +121,19 @@ public class MapController {
 			String jsonStr = null;
 			
 			if(favor.equals("finedust")) {
-				jsonStr = null;
+				log.info("get noise locations");
+				jsonStr = fineDustDBHandle.getLocation();
 			} else if (favor.equals("noise")) {
-				log.info("get noise locations \n");
+				log.info("get noise locations");
 				jsonStr = noiseDBHandle.getLocation();
 			} else if (favor.equals("criminal")) {
-				jsonStr = null;
+				jsonStr = crimeDBHandle.getLocation();
 			} else if (favor.equals("foreigner")) {
-				jsonStr = null;
+				jsonStr = foreignerDBHandle.getLocation();
 			} else if (favor.equals("wsafezone")) {
 				jsonStr = wSafeZoneDBHandle.makeJson();
 			} else if (favor.equals("traffic")){
-				jsonStr = null;
+				jsonStr = trafficDBHandle.getLocation();
 			} else {
 				jsonStr = null;
 			}
