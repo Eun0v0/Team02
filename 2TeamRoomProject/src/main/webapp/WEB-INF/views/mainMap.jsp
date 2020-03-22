@@ -1087,8 +1087,7 @@
 
       var positions = [];//전체 정보
       var selectOption = ""; //선택된 옵션 정보
-	  var map;      
-      
+	  var map; 
       
       $(function(){
     	  $.getJSON("showWSafeZone", recvJson)
@@ -1130,11 +1129,93 @@
               , level: 8    // 지도의 확대레벨
           };
 		  // 지도를 생성
-          map = new kakao.maps.Map(mapContainer, mapOption);
-          drawCircles();
+          map = new kakao.maps.Map(mapContainer, mapOption),
+          customOverlay = new kakao.maps.CustomOverlay({}),
+          infowindow = new kakao.maps.InfoWindow({removable: true});
+          
+          for (var i = 0, len = positions.length; i < len; i++) {
+        	  drawCircles(positions[i]);
+        	}
+		  
+		  
+		  //drawCircles();
+      }
+      
+      function drawCircles(positions){
+    	// 지도에 표시할 원을 생성합니다
+		    var circle = new kakao.maps.Circle({
+			center : positions.latlng, // 원의 중심좌표 입니다 
+			radius : 200, // 미터 단위의 원의 반지름입니다 
+			strokeWeight : 0, // 선의 두께입니다 
+			//strokeColor : '#FF6C6C', // 선의 색깔입니다
+			//strokeOpacity : 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+			//strokeStyle : 'dash', // 선의 스타일 입니다
+			fillColor : '#FF6C6C', // 채우기 색깔입니다
+			fillOpacity : 0.7 // 채우기 불투명도 입니다   
+			 });
+        
+	       if(selectOption=="noise"||selectOption=="criminal"||selectOption=="finedust"){
+	      	 circle.setRadius(2000);
+	      	 
+	      	 if(1<=positions.score && positions.score <=3) //나쁨
+	      	 	circle.setOptions({fillColor: '#CD3B3B'}); 
+	      	 else if (4<=positions.score && positions.score <=7) //보통
+	      		 circle.setOptions({fillColor: '#FF7171'}); 
+	      	 else //좋음
+	      		 circle.setOptions({fillColor: '#FFB9B9'});
+	       }
+       
+	    // 다각형에 mouseover 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 변경합니다 
+	       // 지역명을 표시하는 커스텀오버레이를 지도위에 표시합니다
+	       kakao.maps.event.addListener(circle, 'mouseover', function(mouseEvent) {
+	           
+	    	   circle.setOptions({fillColor: '#FFEAEA'});
+	    	   
+	    	   var content = '<div class="scoreShow"> 점수 정보: ' + positions.score + '</div>';
+	    		
+	           infowindow.setContent(content); 
+	           infowindow.setPosition(mouseEvent.latLng); 
+	           infowindow.setMap(map);
+	    	   
+	    	   /* customOverlay.setContent('<div class="scoreInfo" style> 점수 : ' + positions.score + '</div>');
+	           
+	           customOverlay.setPosition(mouseEvent.latLng); 
+	           customOverlay.setMap(map); */
+	       });
+	
+	       // 다각형에 mousemove 이벤트를 등록하고 이벤트가 발생하면 커스텀 오버레이의 위치를 변경합니다 
+	       kakao.maps.event.addListener(circle, 'mousemove', function(mouseEvent) {
+	           
+	           customOverlay.setPosition(mouseEvent.latLng); 
+	       });
+	
+	       // 다각형에 mouseout 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 원래색으로 변경합니다
+	       // 커스텀 오버레이를 지도에서 제거합니다 
+	       kakao.maps.event.addListener(circle, 'mouseout', function() {
+	    	   if(1<=positions.score && positions.score <=3) //나쁨
+		      	 	circle.setOptions({fillColor: '#CD3B3B'}); 
+		      	 else if (4<=positions.score && positions.score <=7) //보통
+		      		 circle.setOptions({fillColor: '#FF7171'}); 
+		      	 else //좋음
+		      		 circle.setOptions({fillColor: '#FFB9B9'});
+	    	   
+	    	   customOverlay.setMap(null);
+	       }); 
+
+	       // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
+	       kakao.maps.event.addListener(circle, 'click', function(mouseEvent) {
+	           var content = '<div class="scoreShow"> 점수 정보: ' + positions.score + '</div>';
+	
+	           infowindow.setContent(content); 
+	           infowindow.setPosition(mouseEvent.latLng); 
+	           infowindow.setMap(map);
+	       });
+	       
+			// 지도에 원을 표시합니다 
+			circle.setMap(map);  
       }
 		
-      function drawCircles(){
+      /* function drawCircles(){
     	  for (var i = 0; i < positions.length; i++) {
               // 지도에 표시할 원을 생성합니다
   			    var circle = new kakao.maps.Circle({
@@ -1159,11 +1240,49 @@
             		 circle.setOptions({fillColor: '#FFB9B9'});
              }
              
+          // 다각형에 mouseover 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 변경합니다 
+             // 지역명을 표시하는 커스텀오버레이를 지도위에 표시합니다
+             kakao.maps.event.addListener(circle, 'mouseover', function(mouseEvent) {
+            	 circle.setOptions({fillColor: '#09f'});
+
+                 customOverlay.setContent('<div class="scoreInfo"> 점수 : ' + positions[i].score + '</div>');
+                 
+                 customOverlay.setPosition(mouseEvent.latLng); 
+                 customOverlay.setMap(map);
+             });
+
+             // 다각형에 mousemove 이벤트를 등록하고 이벤트가 발생하면 커스텀 오버레이의 위치를 변경합니다 
+             kakao.maps.event.addListener(circle, 'mousemove', function(mouseEvent) {
+                 
+                 customOverlay.setPosition(mouseEvent.latLng); 
+             });
+
+             // 다각형에 mouseout 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 원래색으로 변경합니다
+             // 커스텀 오버레이를 지도에서 제거합니다 
+             kakao.maps.event.addListener(circle, 'mouseout', function() {
+            	 if(1<=score && score <=3) //나쁨
+             	 	circle.setOptions({fillColor: '#CD3B3B'}); 
+             	 else if (4<=score && score <=7) //보통
+             		 circle.setOptions({fillColor: '#FF7171'}); 
+             	 else //좋음
+             		 circle.setOptions({fillColor: '#FFB9B9'});
+                 customOverlay.setMap(null);
+             }); 
+
+             // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
+             kakao.maps.event.addListener(circle, 'click', function(mouseEvent) {
+                 var content = '<div class="score">' + positions[i].score + '</div>';
+
+                 infowindow.setContent(content); 
+                 infowindow.setPosition(mouseEvent.latLng); 
+                 infowindow.setMap(map);
+             });
+             
              
    			// 지도에 원을 표시합니다 
    			 circle.setMap(map);
           }
-      }
+      } */
     </script>
 
 </body>
