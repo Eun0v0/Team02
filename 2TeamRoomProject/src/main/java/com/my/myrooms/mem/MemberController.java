@@ -1,5 +1,7 @@
 package com.my.myrooms.mem;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -32,6 +34,11 @@ public class MemberController {
 	@Autowired
 	CusOptionDBHandle cusOptionDBHandle;
 
+	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
+	public String loginFormFn(HttpServletResponse response, Model model) {
+		return "loginForm";
+	}
+	
 	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)
 	public String joinFormFn(HttpServletResponse response, Model model) {
 		return "joinForm";
@@ -43,15 +50,18 @@ public class MemberController {
 		String password = request.getParameter("password");
 		String name = request.getParameter("name");
 		String sex = request.getParameter("sex");
-		String age = request.getParameter("age");
+		int age = Integer.parseInt(request.getParameter("age"));
 		String gu = request.getParameter("gu");
 		String dong = request.getParameter("dong");
 		String job = request.getParameter("job");
-		String[] options = request.getParameterValues("options");
+		customerDBHandle.makeJson();
+		customerDBHandle.insertCustomer(id, password, name, sex, age, gu, dong, job);
 
-		for(String s : options) {
-			System.out.println(s);
-		}
+		String[] options = request.getParameterValues("option");
+		cusOptionDBHandle.makeJson();
+		for(String s: options)
+			cusOptionDBHandle.insertCusOption(id, s);
+		
 		model.addAttribute("id", id);
 		model.addAttribute("password", password);
 		model.addAttribute("name", name);
@@ -60,32 +70,30 @@ public class MemberController {
 		model.addAttribute("gu", gu);
 		model.addAttribute("dong", dong);
 		model.addAttribute("job", job);
+
 		return "joinComplete";
 	}
+
+	@RequestMapping(value = "/dummy", method = RequestMethod.GET)
+	public String dummy(HttpServletResponse response, Model model) {
+		return "dummy";
+	}
 	
-	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
-	public String loginFormFn(HttpServletResponse response, Model model) {
-		return "loginForm";
+	@RequestMapping(value = "/selectID", method = RequestMethod.GET)
+	public void selectID(HttpServletRequest request, HttpServletResponse response, Model model) {
+		String sid = request.getParameter("id");
+		customerDBHandle.selectID(sid);
+
+		try {
+			PrintWriter out = response.getWriter();
+			String jsonStr = customerDBHandle.selectID(sid);
+			
+			out.print(jsonStr);
+			out.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
 	}
-	////
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String loginFn(HttpServletResponse response, Model model) {
-		return "NiceAdminLogin";
-	}
-	////
-	@RequestMapping(value = "/loginConfirm", method = RequestMethod.GET)
-	public String loginConfirm(HttpServletResponse response, Model model) {
-		String id = "dojw";
-		String pw = "qwe";
-		
-		
-		
-		return "mainMap";
-	}
-//	
-//	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)
-//	public String joinFormFn(HttpServletResponse response, Model model) {
-//		return "joinForm";
-//	}
 
 }

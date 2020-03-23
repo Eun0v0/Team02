@@ -18,41 +18,61 @@ public class CusOptionDBHandle {
 
 	Connection conn;
 	PreparedStatement pstmt;
-	
-	public String makeJson(){
+
+	public String makeJson() {
 		JSONArray cusOptionArr = new JSONArray();
-		String sql="select * from c_option";
+		String sql = "select * from c_option";
 		ResultSet rs = null;
-		
+
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();	
-			
-			while(rs.next()){
-				Boolean air = rs.getBoolean("air");
-				Boolean noise = rs.getBoolean("noise");
-				Boolean criminal = rs.getBoolean("criminal");
-				Boolean foreigner = rs.getBoolean("foreigner");
-				Boolean wSafeZone = rs.getBoolean("safezone");
-				Boolean traffic = rs.getBoolean("traffic");
-				
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String id = rs.getString("id");
+				String air = rs.getString("air");
+				String noise = rs.getString("noise");
+				String criminal = rs.getString("criminal");
+				String foreigner = rs.getString("foreigner");
+				String wSafeZone = rs.getString("safezone");
+				String traffic = rs.getString("traffic");
+
 				JSONObject cusOptionObj = new JSONObject();
-			
+
+				cusOptionObj.put("id", id);
 				cusOptionObj.put("air", air);
 				cusOptionObj.put("noise", noise);
 				cusOptionObj.put("criminal", criminal);
 				cusOptionObj.put("foreigner", foreigner);
 				cusOptionObj.put("wSafeZone", wSafeZone);
 				cusOptionObj.put("traffic", traffic);
-				
+
 				cusOptionArr.add(cusOptionObj);
 			}
 			rs.close();
 			return cusOptionArr.toJSONString();
-			
-		}catch(Exception ex) {
+
+		} catch (Exception ex) {
 			return "Error: " + ex.getStackTrace();
 		}
 	}
+
+	public String insertCusOption(String id, String option){ 
+		String sql ="insert into C_OPTION values(?, indexseq.nextval, ?)"; 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, option);
+			pstmt.execute();
+			
+			System.out.println("추가 성공");
+			return "add success";
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("추가 실패");
+			return "add fail" + e.getMessage();
+		}
+	}
+	
 }

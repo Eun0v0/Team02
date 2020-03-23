@@ -30,8 +30,6 @@
 <link href="resources/NiceAdmin/css/style.css" rel="stylesheet">
 <link href="resources/NiceAdmin/css/style-responsive.css"
 	rel="stylesheet" />
-
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 	//빈칸 여부 or 비밀번호 일치 테스트 
 	function check() {
@@ -73,23 +71,14 @@
 				</p>
 				<div class="input-group">
 					<span class="input-group-addon"><i class="icon_profile"></i></span>
-					<input type="text" class="form-control" name="id"
-						placeholder="UserID" autofocus>
+					<input type="text" class="form-control" value="id" placeholder="UserID"
+						autofocus>
 					<div>
 						<input type="button" class="form-control" value="Confirm"
 							onclick="isNew()">
 						<script>
 							function isNew() {
-								$.getJSON("selectID?id="+$('[name="id"]').val(), recvID)
-							}
-							
-							function recvID(data){
-
-								if(data.length == 0)
-									alert("가능")
-								else
-									alert("불가능")
-									
+								system.out.print("중복확인!");
 							}
 						</script>
 					</div>
@@ -137,26 +126,31 @@
 					type="radio" name="job" value="직장인" checked>직장인 <input
 					type="radio" name="job" value="자영업" checked>자영업
 				<div>
-					<hr>
-					<br> Preference <label class="checkbox"> <input
-						type="checkbox" name="option" value="finedust" checked>Fine
-						Dust
-					</label> <label class="checkbox"> <input type="checkbox"
-						name="option" value="noise" checked>Noise
-					</label> <label class="checkbox"> <input type="checkbox"
-						name="option" value="crime" checked>criminal
-					</label> <label class="checkbox"> <input type="checkbox"
-						name="option" value="foreigner" checked>foreigner
-					</label> <label class="checkbox"> <input type="checkbox"
-						name="option" value="wsafezone" checked>Woman Safe Zone
-					</label> <label class="checkbox"> <input type="checkbox"
-						name="option" value="traffic" checked>Traffic Accident
+					<hr><br>
+					Preference
+					<label class="checkbox">
+					<input type="checkbox" name="option" value="air" checked>Fine Dust
+					</label>
+					<label class="checkbox">
+					<input type="checkbox" name="option" value="noise" checked>Noise
+					</label>
+					<label class="checkbox">
+					<input type="checkbox" name="option" value="criminal" checked>criminal
+					</label>
+					<label class="checkbox">
+					<input type="checkbox" name="option" value="foreigner" checked>foreigner
+					</label>
+					<label class="checkbox">
+					<input type="checkbox" name="option" value="safezone" checked>Woman Safe Zone
+					</label>
+					<label class="checkbox">
+					<input type="checkbox" name="option" value="traffic" checked>Traffic Accident
 					</label>
 				</div>
 
 				<input class="btn btn-primary btn-lg btn-block" type="submit"
-					value="Sign Up" formaction="joinComplete"> <input
-					class="btn btn-primary btn-lg btn-block" type="button"
+					value="Sign Up" formaction="joinComplete">
+				<input class="btn btn-primary btn-lg btn-block" type="button"
 					value="Cancel" onclick="location.href='loginForm'">
 			</div>
 

@@ -15,7 +15,7 @@
 
 <title>Login Page 2 | Creative - Bootstrap 3 Responsive Admin
 	Template</title>
-
+	
 <!-- Bootstrap CSS -->
 <link href="resources/NiceAdmin/css/bootstrap.min.css" rel="stylesheet">
 <!-- bootstrap theme -->
@@ -53,7 +53,22 @@
 				</p>
 				<div class="input-group">
 					<span class="input-group-addon"><i class="icon_profile"></i></span>
-					<input type="text" class="form-control" placeholder="Username"
+					<input type="text" class="form-control" placeholder="UserID"
+						autofocus>
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="icon_profile"></i></span>
+					<input type="text" class="form-control" placeholder="UserID"
+						autofocus>
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="icon_profile"></i></span>
+					<input type="text" class="form-control" placeholder="UserID"
+						autofocus>
+				</div>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="icon_profile"></i></span>
+					<input type="text" class="form-control" placeholder="UserID"
 						autofocus>
 				</div>
 				<div class="input-group">
@@ -65,8 +80,8 @@
 						<a href="#"> Forgot Password?</a>
 				</span>
 				</label>
-				<button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-				<button class="btn btn-info btn-lg btn-block" type="submit">Signup</button>
+				<button class="btn btn-primary btn-lg btn-block" type="submit" formaction="mainMap">Login</button>
+				<button class="btn btn-info btn-lg btn-block" type="submit" formaction="joinForm">Signup</button>
 			</div>
 		</form>
 		<div class="text-right">
