@@ -1,4 +1,4 @@
-package com.my.myrooms.test;
+package com.my.myroom.test;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -34,7 +34,6 @@ public class SearchLogDBHandle {
 				String id = rs.getString("id");
 				String sex = rs.getString("sex");
 				int age = rs.getInt("age");
-				String job = rs.getString("job");
 				Date searchDate = rs.getDate("searchDate");
 				String gu = rs.getString("gu");
 				String dong = rs.getString("dong");
@@ -46,7 +45,6 @@ public class SearchLogDBHandle {
 				searchLogObj.put("id", id);
 				searchLogObj.put("sex", sex);
 				searchLogObj.put("age", age);
-				searchLogObj.put("job", job);
 				searchLogObj.put("searchDate", searchDate);
 				searchLogObj.put("gu", gu);
 				searchLogObj.put("dong", dong);
