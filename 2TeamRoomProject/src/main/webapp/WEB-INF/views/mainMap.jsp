@@ -57,6 +57,59 @@
     Author: BootstrapMade
     Author URL: https://bootstrapmade.com
   ======================================================= -->
+<style>
+.customoverlay {
+	position: relative;
+	bottom: 85px;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+	border-bottom: 2px solid #ddd;
+	float: left;
+}
+
+.customoverlay:nth-of-type(n) {
+	border: 0;
+	box-shadow: 0px 1px 2px #888;
+}
+
+.customoverlay a {
+	display: block;
+	text-decoration: none;
+	color: #000;
+	text-align: center;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: bold;
+	overflow: hidden;
+	background: #d95050;
+	background: #d95050
+		no-repeat right 14px center;
+}
+
+.customoverlay .title {
+	display: block;
+	text-align: center;
+	background: white;
+	margin-right: 35px;
+	padding: 10px 15px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.customoverlay:after {
+	content: '';
+	position: absolute;
+	margin-left: -12px;
+	left: 50%;
+	bottom: -12px;
+	width: 22px;
+	height: 12px;
+	background:
+		url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
+</style>
+
+
 </head>
 
 <body>
@@ -270,9 +323,8 @@
 			<div id="sidebar" class="nav-collapse ">
 				<!-- sidebar menu start-->
 				<ul class="sidebar-menu">
-					<li class="active"><a class="" href="index.html"> <i
-							class="icon_house_alt"></i> <span>Dashboard</span>
-					</a></li>
+					<li class="active"><a class="" href="mainMap"> <i
+							class="icon_house_alt"></i> <spa> Home </span></a></li>
 					<li class="sub-menu"><a href="javascript:;" class=""> <i
 							class="icon_document_alt"></i> <span>Forms</span> <span
 							class="menu-arrow arrow_carrot-right"></span>
@@ -337,7 +389,7 @@
 							<i class="fa fa-laptop"></i> Dashboard
 						</h3>
 						<ol class="breadcrumb">
-							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+							<li><i class="fa fa-home"></i><a href="mainMap">Home</a></li>
 							<li><i class="fa fa-laptop"></i>Dashboard</li>
 						</ol>
 					</div>
@@ -394,14 +446,14 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h2>
-									<i class="fa fa-map-marker red"></i><strong>Countries</strong>
+									<i class="fa fa-map-marker red"></i>
+									<strong>항목별 지도보기    ( 상위 30%: 좋음 / 하위 30%: 나쁨 )</strong>
 								</h2>
 								<div class="panel-actions">
-									<a href="index.html#" class="btn-setting"><i
-										class="fa fa-rotate-right"></i></a> <a href="index.html#"
+									<a href="mainMap" class="btn-setting"><i
+										class="fa fa-rotate-right"></i></a> <a href="mainMap"
 										class="btn-minimize"><i class="fa fa-chevron-up"></i></a> <a
-										href="index.html#" class="btn-close"><i
-										class="fa fa-times"></i></a>
+										href="mainMap" class="btn-close"><i class="fa fa-times"></i></a>
 								</div>
 							</div>
 							<div class="panel-body-map">
@@ -1136,9 +1188,6 @@
           for (var i = 0, len = positions.length; i < len; i++) {
         	  drawCircles(positions[i]);
         	}
-		  
-		  
-		  //drawCircles();
       }
       
       function drawCircles(positions){
@@ -1169,26 +1218,25 @@
 	       // 지역명을 표시하는 커스텀오버레이를 지도위에 표시합니다
 	       kakao.maps.event.addListener(circle, 'mouseover', function(mouseEvent) {
 	           
+	    	   //console.log("OK")
 	    	   circle.setOptions({fillColor: '#FFEAEA'});
 	    	   
-	    	   var content = '<div class="scoreShow"> 점수 정보: ' + positions.score + '</div>';
+	    	   /* var content = '점수 정보: ' + positions.score ;
 	    		
-	           infowindow.setContent(content); 
-	           infowindow.setPosition(mouseEvent.latLng); 
-	           infowindow.setMap(map);
-	    	   
-	    	   /* customOverlay.setContent('<div class="scoreInfo" style> 점수 : ' + positions.score + '</div>');
+	    	   customOverlay.setContent('<div style="color:black">점수 : ' + positions.score +'</div>');
 	           
 	           customOverlay.setPosition(mouseEvent.latLng); 
-	           customOverlay.setMap(map); */
+	           customOverlay.setMap(map);  */
 	       });
 	
 	       // 다각형에 mousemove 이벤트를 등록하고 이벤트가 발생하면 커스텀 오버레이의 위치를 변경합니다 
-	       kakao.maps.event.addListener(circle, 'mousemove', function(mouseEvent) {
+	       /* kakao.maps.event.addListener(circle, 'mousemove', function(mouseEvent) {
 	           
 	           customOverlay.setPosition(mouseEvent.latLng); 
-	       });
-	
+	       }); */
+	 
+	 		
+	 
 	       // 다각형에 mouseout 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 원래색으로 변경합니다
 	       // 커스텀 오버레이를 지도에서 제거합니다 
 	       kakao.maps.event.addListener(circle, 'mouseout', function() {
@@ -1199,90 +1247,48 @@
 		      	 else //좋음
 		      		 circle.setOptions({fillColor: '#FFB9B9'});
 	    	   
-	    	   customOverlay.setMap(null);
+	    	   //customOverlay.setMap(null);
 	       }); 
 
 	       // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
 	       kakao.maps.event.addListener(circle, 'click', function(mouseEvent) {
-	           var content = '<div class="scoreShow"> 점수 정보: ' + positions.score + '</div>';
-	
-	           infowindow.setContent(content); 
+	           
+	    	   console.log("click")
+	    	   
+	    	   if(selectOption=="noise")
+	    	   	  optionName = "환경소음"
+	    	   else if (selectOption=="criminal")
+	    		  optionName = "치안"
+	    	   else if (selectOption=="finedust")
+	    		   optionName = "미세먼지"
+	    	   else
+	    		   optionName = "정도"
+	    		   
+	    		   
+	    	   console.log(optionName)
+	    	   	 if(1<=positions.score && positions.score <=3) //나쁨
+	    		     scoreText = "나쁨" 
+		      	 else if (4<=positions.score && positions.score <=7) //보통
+		      		 scoreText = "보통" 
+		      	 else //좋음
+		      		 scoreText = "좋음"   
+	       	   
+	    	   var content = '<div class="customoverlay"><a><span class="title">' + optionName +': ' + scoreText + '</span></a></div>';
+	           
+	           /* infowindow.setContent(content); 
 	           infowindow.setPosition(mouseEvent.latLng); 
-	           infowindow.setMap(map);
+	           infowindow.setMap(map); */
+  
+	    	   customOverlay.setContent(content);
+	           customOverlay.setPosition(mouseEvent.latLng); 
+	           customOverlay.setMap(map);
+	           
 	       });
+	
 	       
 			// 지도에 원을 표시합니다 
 			circle.setMap(map);  
       }
-		
-      /* function drawCircles(){
-    	  for (var i = 0; i < positions.length; i++) {
-              // 지도에 표시할 원을 생성합니다
-  			    var circle = new kakao.maps.Circle({
-  				center : positions[i].latlng, // 원의 중심좌표 입니다 
-  				radius : 200, // 미터 단위의 원의 반지름입니다 
-  				strokeWeight : 0, // 선의 두께입니다 
-  				//strokeColor : '#FF6C6C', // 선의 색깔입니다
-  				//strokeOpacity : 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-  				//strokeStyle : 'dash', // 선의 스타일 입니다
-  				fillColor : '#FF6C6C', // 채우기 색깔입니다
-  				fillOpacity : 0.7 // 채우기 불투명도 입니다   
-   			 });
-              
-             if(selectOption=="noise"||selectOption=="criminal"||selectOption=="finedust"){
-            	 circle.setRadius(2000);
-            	 
-            	 if(1<=positions[i].score && positions[i].score <=3) //나쁨
-            	 	circle.setOptions({fillColor: '#CD3B3B'}); 
-            	 else if (4<=positions[i].score && positions[i].score <=7) //보통
-            		 circle.setOptions({fillColor: '#FF7171'}); 
-            	 else //좋음
-            		 circle.setOptions({fillColor: '#FFB9B9'});
-             }
-             
-          // 다각형에 mouseover 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 변경합니다 
-             // 지역명을 표시하는 커스텀오버레이를 지도위에 표시합니다
-             kakao.maps.event.addListener(circle, 'mouseover', function(mouseEvent) {
-            	 circle.setOptions({fillColor: '#09f'});
-
-                 customOverlay.setContent('<div class="scoreInfo"> 점수 : ' + positions[i].score + '</div>');
-                 
-                 customOverlay.setPosition(mouseEvent.latLng); 
-                 customOverlay.setMap(map);
-             });
-
-             // 다각형에 mousemove 이벤트를 등록하고 이벤트가 발생하면 커스텀 오버레이의 위치를 변경합니다 
-             kakao.maps.event.addListener(circle, 'mousemove', function(mouseEvent) {
-                 
-                 customOverlay.setPosition(mouseEvent.latLng); 
-             });
-
-             // 다각형에 mouseout 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 원래색으로 변경합니다
-             // 커스텀 오버레이를 지도에서 제거합니다 
-             kakao.maps.event.addListener(circle, 'mouseout', function() {
-            	 if(1<=score && score <=3) //나쁨
-             	 	circle.setOptions({fillColor: '#CD3B3B'}); 
-             	 else if (4<=score && score <=7) //보통
-             		 circle.setOptions({fillColor: '#FF7171'}); 
-             	 else //좋음
-             		 circle.setOptions({fillColor: '#FFB9B9'});
-                 customOverlay.setMap(null);
-             }); 
-
-             // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
-             kakao.maps.event.addListener(circle, 'click', function(mouseEvent) {
-                 var content = '<div class="score">' + positions[i].score + '</div>';
-
-                 infowindow.setContent(content); 
-                 infowindow.setPosition(mouseEvent.latLng); 
-                 infowindow.setMap(map);
-             });
-             
-             
-   			// 지도에 원을 표시합니다 
-   			 circle.setMap(map);
-          }
-      } */
     </script>
 
 </body>
