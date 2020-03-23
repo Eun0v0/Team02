@@ -3,7 +3,9 @@
 <html>
 <head>
 <title>회원가입 처리</title>
-
+<script>
+	System.out.println("aa");
+</script>
 </head>
 <body>
 
@@ -41,7 +43,7 @@
 		</table>
 
 		<hr>
-		<br> <input type="button" value="로그인 하러가기"
+		<br> <input type="button" value="Go to Login"
 			onclick="location.href='loginForm'">
 	</div>
 </body>

@@ -16,19 +16,28 @@
 		
 		function recvJson(data){
 			console.log(data)
-			$.each(data, (i, v) => {$("#insTab > tbody").append("<tr><td>" + v.insuranceIndex + "</td><td>" 
+			$.each(data, (i, v) => {
+				
+				$("#insTab > tbody").append("<tr><td>" + v.insuranceIndex + "</td><td>" 
 					+ v.insuranceName + "</td><td>" + v.category + 
 					"</td><td>" + v.ages + "</td><td>" + v.sex + "</td><td>"
-					+ v.imgName + "</td><td> <button> 수정 </button> </td></tr>")
+					+ v.imgName + "</td><td> <button id='modify'> 수정 </button> </td></tr>")
+				
+					$('tbody>tr>td>#modify').click("deleteInsurance?name="+v.insuranceName, function () {
+						$(this).parent().parent().remove()
+					}))
+					
 			})
 		}
+		
+		
 		
 		function modify(){
 			$("#insTab > tbody").click()
 		}
 		
 	</script>
-	<table id = "insTab">
+	<table id="insTab">
 		<thead>
 			<tr>
 				<th>보험 구분</th>
@@ -41,7 +50,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		
+
 		</tbody>
 	</table>
 </body>

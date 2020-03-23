@@ -11,6 +11,9 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Repository
 public class InsuranceDBHandle {
 	@Autowired
@@ -53,6 +56,23 @@ public class InsuranceDBHandle {
 			
 		}catch(Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		}
+	}
+	
+	public void deleteInsurance(String name){
+		JSONArray insuranceArr = new JSONArray();
+		String sql="delete from insurance where insurancename=?";
+		
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.executeUpdate();	
+			
+			log.info("삭제 성공");
+			
+		}catch(Exception ex) {
+			log.info("삭제 실패: "+ex.getMessage());
 		}
 	}
 }

@@ -55,4 +55,12 @@ public class InsuranceController {
 		};
 	}
 	
+	@RequestMapping(value = "/deleteInsurance", method = RequestMethod.GET)
+	public void deleteInsurance(HttpServletResponse response, HttpServletRequest request, Model model) {
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=UTF-8");
+
+		String name = request.getParameter("name");
+		insurnaceDBHandle.deleteInsurance(name);
+	}
 }
