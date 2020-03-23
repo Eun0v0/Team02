@@ -3,6 +3,9 @@
 <html>
 <head>
 <title>회원가입 처리</title>
+<script>
+System.out.println("aa");
+</script>
 </head>
 <body>
 

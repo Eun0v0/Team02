@@ -71,6 +71,7 @@ public class MemberController {
 		model.addAttribute("dong", dong);
 		model.addAttribute("job", job);
 
+		System.out.println("aa");
 		return "joinComplete";
 	}
 

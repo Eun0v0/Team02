@@ -34,6 +34,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 	//빈칸 여부 or 비밀번호 일치 테스트 
+		System.out.println("aa");
 	function check() {
 		if (!document.joinForm.id.value) {
 			alert("id를 입력하세요.");

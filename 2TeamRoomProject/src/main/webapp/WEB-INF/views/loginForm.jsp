@@ -43,7 +43,9 @@
 </head>
 
 <body class="login-img3-body">
-
+<script>
+System.out.println("aa");
+</script>
 	<div class="container">
 
 		<form class="login-form" action="index">

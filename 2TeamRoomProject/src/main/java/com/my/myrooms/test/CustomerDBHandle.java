@@ -22,7 +22,8 @@ public class CustomerDBHandle {
 		JSONArray customerArr = new JSONArray();
 		String sql="select * from customer";
 		ResultSet rs = null;
-		
+
+		System.out.println("aa");
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);

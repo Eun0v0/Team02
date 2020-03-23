@@ -20,6 +20,8 @@ public class CusOptionDBHandle {
 	PreparedStatement pstmt;
 
 	public String makeJson() {
+
+		System.out.println("aa");
 		JSONArray cusOptionArr = new JSONArray();
 		String sql = "select * from c_option";
 		ResultSet rs = null;
