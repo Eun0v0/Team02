@@ -20,12 +20,15 @@ public class CusOptionDBHandle {
 	
 	public String makeJson(){
 		JSONArray cusOptionArr = new JSONArray();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
 		String sql="select * from c_option";
 		ResultSet rs = null;
 		
 		try {
-			Connection conn = dataSource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();	
 			
 			while(rs.next()){
@@ -44,32 +47,77 @@ public class CusOptionDBHandle {
 			rs.close();
 			return cusOptionArr.toJSONString();
 			
-		}catch(Exception ex) {
+		} catch(Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public String insertCusOption(String id, String option){ 
+		
+		String sql ="insert into C_OPTION values(?, indexseq.nextval, ?)"; 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, option);
+			pstmt.execute();
+			
+			System.out.println("추가 성공");
+			return "add success";
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("추가 실패");
+			return "add fail" + e.getMessage();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
 	public ArrayList<String> selectOption(String id) {
 		
 		ArrayList<String> optionArr = new ArrayList<String>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		
 		//관심사 목록 받기
 		try {
 			String sql = String.format("select selectoption from c_option where id='%s'", id);
-			Connection conn = dataSource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 
 			while(rs.next()) {
 				System.out.println();
 				optionArr.add(rs.getString("selectoption"));
 			}
+
 			rs.close();
 			return optionArr;
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }

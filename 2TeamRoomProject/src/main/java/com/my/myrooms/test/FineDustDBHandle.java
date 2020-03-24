@@ -3,6 +3,7 @@ package com.my.myrooms.test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
@@ -16,8 +17,8 @@ public class FineDustDBHandle {
 	@Autowired
 	DataSource dataSource;
 
-	Connection conn;
-	PreparedStatement pstmt;
+	Connection conn = null;
+	PreparedStatement pstmt = null;
 	
 	public String makeJson(){
 		JSONArray fineDustArr = new JSONArray();
@@ -47,9 +48,16 @@ public class FineDustDBHandle {
 			rs.close();
 			return fineDustArr.toJSONString();
 			
-		}catch(Exception ex) {
+		} catch(Exception ex) {
 			return "Error: " + ex.getStackTrace();
-		}
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}	
 	}
 	
 	public String getLocation() {
@@ -79,9 +87,16 @@ public class FineDustDBHandle {
 			System.out.println("size:" + locArr.size());
 			return locArr.toJSONString();
 			
-		}catch(Exception ex) {
+		} catch(Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
+
 	}
 }

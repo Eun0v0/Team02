@@ -3,6 +3,7 @@ package com.my.myrooms.test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
@@ -15,13 +16,13 @@ import org.springframework.stereotype.Repository;
 public class CrimeDBHandle {
 	@Autowired
 	DataSource dataSource;
-
-	Connection conn;
-	PreparedStatement pstmt;
 	
 	public String makeJson(){
 		JSONArray crimeArr = new JSONArray();
 		String sql="select * from crime";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
@@ -47,14 +48,23 @@ public class CrimeDBHandle {
 			rs.close();
 			return crimeArr.toJSONString();
 			
-		}catch(Exception ex) {
+		} catch(Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		}  finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
 	public String getLocation() {
 		JSONArray locArr = new JSONArray();
 		String sql="select lati, logti, score from loccode l , crime c where l.gucode =c.gucode AND l.dongcode is NULL";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
@@ -79,8 +89,15 @@ public class CrimeDBHandle {
 			System.out.println("size:" + locArr.size());
 			return locArr.toJSONString();
 			
-		}catch(Exception ex) {
+		} catch(Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		}  finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }

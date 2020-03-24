@@ -3,6 +3,7 @@ package com.my.myrooms.test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
@@ -16,11 +17,11 @@ public class HousePriceDBHandle {
 	@Autowired
 	DataSource dataSource;
 
-	Connection conn;
-	PreparedStatement pstmt;
-	
 	public String makeJson(){
 		JSONArray housePriceArr = new JSONArray();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
 		String sql="select * from houseprice";
 		ResultSet rs = null;
 		
@@ -45,8 +46,16 @@ public class HousePriceDBHandle {
 			rs.close();
 			return housePriceArr.toJSONString();
 			
-		}catch(Exception ex) {
+		} catch(Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
 	}
 }

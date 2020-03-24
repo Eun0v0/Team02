@@ -1,12 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
 
-<html>
 <head>
-<title>회원가입 화면</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description"
+	content="Creative - Bootstrap 3 Responsive Admin Template">
+<meta name="author" content="GeeksLabs">
+<meta name="keyword"
+	content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+<link rel="shortcut icon" href="img/favicon.png">
+
+<title>Login Page 2 | Creative - Bootstrap 3 Responsive Admin
+	Template</title>
+
+<!-- Bootstrap CSS -->
+<link href="resources/NiceAdmin/css/bootstrap.min.css" rel="stylesheet">
+<!-- bootstrap theme -->
+<link href="resources/NiceAdmin/css/bootstrap-theme.css"
+	rel="stylesheet">
+<!--external css-->
+<!-- font icon -->
+<link href="resources/NiceAdmin/css/elegant-icons-style.css"
+	rel="stylesheet" />
+<link href="resources/NiceAdmin/css/font-awesome.css" rel="stylesheet" />
+<!-- Custom styles -->
+<link href="resources/NiceAdmin/css/style.css" rel="stylesheet">
+<link href="resources/NiceAdmin/css/style-responsive.css"
+	rel="stylesheet" />
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
-	//빈칸 여부 or 비밀번호 일치 테스트 
+	//빈칸 여부 or 비밀번호 일치 테스트
+	System.out.println("aa");
 	function check() {
 		if (!document.joinForm.id.value) {
 			alert("id를 입력하세요.");
@@ -32,85 +60,123 @@
 		}
 	}
 </script>
+
 </head>
-<body>
-	<div id="wrap">
-		<br> <br> <b><font size="6" color="gray">회원가입</font></b> <br>
-		<br> <br>
 
-		<form name="joinForm" onSubmit="return check()" action="joinComplete">
-			<table>
-				<tr>
-					<td id="title">아이디</td>
-					<td><input type="text" name="id" maxlength="20"> <input
-						type="button" value="중복확인" onclick="isNew()"> <script>
+<body class="login-img3-body">
+
+	<div class="container">
+
+		<form class="login-form" name="joinForm" onSubmit="return check()">
+			<div class="login-wrap">
+				<p class="login-img">
+					<i class="icon_lock_alt"></i>
+				</p>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="icon_profile"></i></span>
+					<input type="text" class="form-control" name="id"
+						placeholder="UserID" autofocus>
+					<div>
+						<input type="button" class="form-control" value="Confirm"
+							onclick="isNew()">
+						<script>
 							function isNew() {
-								//중복확인!!!!!!!!!!!!!!!!!!!!!!!!!
+								$.getJSON("selectID?id="
+										+ $('[name="id"]').val(), recvID)
 							}
-						</script></td>
-				</tr>
 
-				<tr>
-					<td id="title">비밀번호</td>
-					<td><input type="password" name="password" maxlength="15">
-					</td>
-				</tr>
+							function recvID(data) {
 
-				<tr>
-					<td id="title">비밀번호 확인</td>
-					<td><input type="password" name="password2" maxlength="15">
-					</td>
-				</tr>
+								if (data.length == 0)
+									alert("가능")
+								else
+									alert("불가능")
 
-				<tr>
-					<td id="title">이름</td>
-					<td><input type="text" name="name" maxlength="40"></td>
-				</tr>
+							}
+						</script>
+					</div>
+				</div>
 
-				<tr>
-					<td id="title">성별</td>
-					<td><input type="radio" name="sex" value="남성" checked>남
-						<input type="radio" name="sex" value="여성" checked>여</td>
-				</tr>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="icon_key_alt"></i></span>
+					<input type="password" class="form-control" name="password"
+						placeholder="Password" autofocus>
 
-				<tr>
-					<td id="title">생년월일</td>
-					<td><input type="date" name="age" maxlength="6"
-						placeholder="년월일(6자)" size="12"></td>
-				</tr>
+				</div>
 
-				<tr>
-					<td id="title">주소(OO구)</td>
-					<td><input type="text" size="10" name="gu" placeholder="강남구" />
-						주소(OO동)<input type="text" size="10" name="dong" placeholder="삼성동" />
-					</td>
-				</tr>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="icon_key_alt"></i></span>
+					<input type="password" class="form-control" name="password2"
+						placeholder="Confirm Password" autofocus>
+				</div>
 
-				<tr>
-					<td id="title">직업</td>
-					<td><input type="radio" name="job" value="무직" checked>무직
-						<input type="radio" name="job" value="학생" checked>학생 <input
-						type="radio" name="job" value="직장인" checked>직장인 <input
-						type="radio" name="job" value="자영업" checked>자영업</td>
-				</tr>
-				<tr>
-					<td><hr></td>
-					<td><hr></td>
-				</tr>
-				<tr>
-					<td id="title">선호항목</td>
-					<td><input type="checkbox" name="options" value="air" checked>대기오염
-						<input type="checkbox" name="options" value="noise" checked>소음공해<br>
-						<input type="checkbox" name="options" value="criminal" checked>범죄/치안
-						<input type="checkbox" name="options" value="foreigner" checked>외국인 거주 현황<br>
-						<input type="checkbox" name="options" value="safezone" checked>여성 안전 지킴이 존
-						<input type="checkbox" name="options" value="traffic" checked>교통 안전사고 현황</td>
-				</tr>
+				<div class="input-group">
+					<span class="input-group-addon"><i class="icon_profile"></i></span>
+					<input type="text" class="form-control" name="name"
+						placeholder="Name" autofocus>
+				</div>
 
-			</table>
-			<br> <input type="submit" value="가입">
-			<input type="button" value="취소" onclick="location.href='loginForm'">
+				<div>
+					<input type="radio" name="sex" value="남성" checked>Man <input
+						type="radio" name="sex" value="여성" checked>Woman
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon"><i class="icon_profile"></i></span>
+					<input type="number" class="form-control" name="age"
+						placeholder="birth(yymmdd)" autofocus>
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon"><i class="icon_profile"></i></span>
+					<input type="text" class="form-control" name="gu" placeholder="OO구"
+						autofocus><input type="text" class="form-control"
+						name="dong" placeholder="OO동" autofocus>
+				</div>
+
+				<input type="radio" name="job" value="무직" checked>무직 <input
+					type="radio" name="job" value="학생" checked>학생 <input
+					type="radio" name="job" value="직장인" checked>직장인 <input
+					type="radio" name="job" value="자영업" checked>자영업
+				<div>
+					<hr>
+					<br> Preference <label class="checkbox"> <input
+						type="checkbox" name="option" value="finedust" checked>Fine
+						Dust
+					</label> <label class="checkbox"> <input type="checkbox"
+						name="option" value="noise" checked>Noise
+					</label> <label class="checkbox"> <input type="checkbox"
+						name="option" value="crime" checked>criminal
+					</label> <label class="checkbox"> <input type="checkbox"
+						name="option" value="foreigner" checked>foreigner
+					</label> <label class="checkbox"> <input type="checkbox"
+						name="option" value="wsafezone" checked>Woman Safe Zone
+					</label> <label class="checkbox"> <input type="checkbox"
+						name="option" value="traffic" checked>Traffic Accident
+					</label>
+				</div>
+
+				<input class="btn btn-primary btn-lg btn-block" type="submit"
+					value="Sign Up" formaction="joinComplete"> <input
+					class="btn btn-primary btn-lg btn-block" type="button"
+					value="Cancel" onclick="location.href='loginForm'">
+			</div>
+
 		</form>
+		<div class="text-right">
+			<div class="credits">
+				<!--
+All the links in the footer should remain intact.
+You can delete the links only if you purchased the pro version.
+Licensing information: https://bootstrapmade.com/license/
+Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
+-->
+				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+			</div>
+		</div>
 	</div>
+
+
 </body>
+
 </html>

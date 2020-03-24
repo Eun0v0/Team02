@@ -3,6 +3,7 @@ package com.my.myrooms.test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,12 +21,15 @@ public class LocCodeDBHandle {
 
 	public String makeJson() {
 		JSONArray locCodeArr = new JSONArray();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
 		String sql = "select * from loccode";
 		ResultSet rs = null;
 
 		try {
-			Connection conn = dataSource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -50,9 +54,16 @@ public class LocCodeDBHandle {
 
 		} catch (Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-
+	
 	public Map<Integer, Integer> getGuCode() {
 
 		Map<Integer, Integer> guCodeMap = new HashMap<Integer, Integer>();
@@ -77,21 +88,4 @@ public class LocCodeDBHandle {
 			return null;
 		}
 	}
-	/*
-	 * public Map<Integer, Integer> getDongCode() {
-	 * 
-	 * Map<Integer, Integer> dongCodeMap = new HashMap<Integer, Integer>();
-	 * 
-	 * String sql = "SELECT dongcode FROM loccode WHERE dongcode IS NOT NULL";
-	 * ResultSet rs = null;
-	 * 
-	 * try { Connection conn = dataSource.getConnection(); PreparedStatement pstmt =
-	 * conn.prepareStatement(sql); rs = pstmt.executeQuery();
-	 * 
-	 * while (rs.next()) { int dongCode = rs.getInt("dongcode"); if
-	 * (!dongCodeMap.containsKey(dongCode)) dongCodeMap.put(dongCode, 0); }
-	 * rs.close(); return dongCodeMap;
-	 * 
-	 * } catch (Exception ex) { return null; } }
-	 */
 }
