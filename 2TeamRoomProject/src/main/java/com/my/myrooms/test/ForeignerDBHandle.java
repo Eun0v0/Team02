@@ -2,6 +2,7 @@ package com.my.myrooms.test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
@@ -15,11 +16,11 @@ public class ForeignerDBHandle {
 	@Autowired
 	DataSource dataSource;
 
-	Connection conn;
-	PreparedStatement pstmt;
-	
 	public String makeJson(){
 		JSONArray foreignerArr = new JSONArray();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
 		String sql="select * from foreigner";
 		ResultSet rs = null;
 		
@@ -48,13 +49,24 @@ public class ForeignerDBHandle {
 			rs.close();
 			return foreignerArr.toJSONString();
 			
-		}catch(Exception ex) {
+		} catch(Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
 	}
 	
 	public String getLocation() {
 		JSONArray locArr = new JSONArray();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
 		String sql="select lati, logti from loccode l , foreigner f where l.dongcode =f.dongcode";
 		ResultSet rs = null;
 		
@@ -78,9 +90,15 @@ public class ForeignerDBHandle {
 			System.out.println("size:" + locArr.size());
 			return locArr.toJSONString();
 			
-		}catch(Exception ex) {
+		} catch(Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
 	}
 }

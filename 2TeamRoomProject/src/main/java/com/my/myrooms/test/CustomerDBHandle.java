@@ -3,6 +3,7 @@ package com.my.myrooms.test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
@@ -16,15 +17,14 @@ public class CustomerDBHandle {
 	@Autowired
 	DataSource dataSource;
 
-	Connection conn;
-	PreparedStatement pstmt;
-
 	public String makeJson() {
 		JSONArray customerArr = new JSONArray();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
 		String sql = "select * from customer";
 		ResultSet rs = null;
 
-		System.out.println("aa");
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -56,12 +56,22 @@ public class CustomerDBHandle {
 
 		} catch (Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public String insertCustomer(String id, String password, String name, String sex, int age, String gu, String dong,
 			String job) {
 		String sql = "insert into Customer values(?, ?, ?, ?, ?, ?, ?, ?)";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -80,28 +90,33 @@ public class CustomerDBHandle {
 // TODO: handle exception
 			System.out.println("추가 실패");
 			return "add fail" + e.getMessage();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public String selectID(String sid) {
 		JSONArray customerArr = new JSONArray();
 		String sql = "select id from customer where id = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
 			conn = dataSource.getConnection();
-
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, sid);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				String id = rs.getString("id");
-
 				JSONObject customerObj = new JSONObject();
-
+				String id = rs.getString("id");
 				customerObj.put("id", id);
-
 				customerArr.add(customerObj);
 			}
 			rs.close();
@@ -109,6 +124,63 @@ public class CustomerDBHandle {
 
 		} catch (Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
+
+	public String confirmID(String sid, String spwd) {
+		System.out.println("confirm ID 호출");
+		String sql = "select id from customer where id = ? AND pwd = ?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		ResultSet rs = null;
+
+		try {
+			conn = dataSource.getConnection();
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sid);
+			pstmt.setString(2, spwd);
+
+			System.out.println(sql);
+			rs = pstmt.executeQuery();
+
+			int num = 0;
+
+			System.out.println("rs: " + rs);
+
+			while (rs.next()) {
+				num++;
+			}
+
+			System.out.println("num: " + num);
+			rs.close();
+			if (num > 0) {
+				System.out.println("성공");
+				return "OK";
+			} else {
+				System.out.println("실패");
+				return "fail";
+			}
+
+		} catch (Exception ex) {
+			System.out.println("ERROR");
+			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
 }

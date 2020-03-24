@@ -3,6 +3,11 @@ package com.my.myrooms.test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -16,12 +21,11 @@ public class WSafeZoneDBHandle {
 	@Autowired
 	DataSource dataSource;
 
-	Connection conn;
-	PreparedStatement pstmt;
-
 	public String makeJson() {
 		JSONArray wSafeZoneArr = new JSONArray();
 		String sql = "select * from wsafezone";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
@@ -53,6 +57,47 @@ public class WSafeZoneDBHandle {
 
 		} catch (Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public ArrayList<WSafeZoneScoreModel> wSafeZoneGroupBy() {
+
+		ArrayList<WSafeZoneScoreModel> arr = new ArrayList<WSafeZoneScoreModel>();
+		String sql = "SELECT guCode, COUNT(guCode) AS score FROM wsafezone GROUP BY name";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int guCode = rs.getInt("guCode");
+				int score = rs.getInt("score");
+
+				arr.add(new WSafeZoneScoreModel(guCode, score));
+			}
+			rs.close();
+			return arr;
+
+		} catch (Exception ex) {
+			return null;
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }

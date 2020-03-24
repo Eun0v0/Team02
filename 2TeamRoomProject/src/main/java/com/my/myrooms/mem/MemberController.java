@@ -96,5 +96,13 @@ public class MemberController {
 			e.printStackTrace();
 		}
 	}
+	
+	@RequestMapping(value = "/loginConfirm", method = RequestMethod.GET)
+	public String loginConfirm(HttpServletResponse response, Model model) {
+		String id = "dojw";
+		String pw = "qwe";
+		
+		return "mainMap";
+	}
 
 }

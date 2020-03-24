@@ -3,6 +3,8 @@ package com.my.myrooms.test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
@@ -15,53 +17,54 @@ import org.springframework.stereotype.Repository;
 public class CusOptionDBHandle {
 	@Autowired
 	DataSource dataSource;
-
-	Connection conn;
-	PreparedStatement pstmt;
-
-	public String makeJson() {
-
-		System.out.println("aa");
+	
+	public String makeJson(){
 		JSONArray cusOptionArr = new JSONArray();
-		String sql = "select * from c_option";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql="select * from c_option";
 		ResultSet rs = null;
-
+		
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
+			rs = pstmt.executeQuery();	
+			
+			while(rs.next()){
 				String id = rs.getString("id");
-				String air = rs.getString("air");
-				String noise = rs.getString("noise");
-				String criminal = rs.getString("criminal");
-				String foreigner = rs.getString("foreigner");
-				String wSafeZone = rs.getString("safezone");
-				String traffic = rs.getString("traffic");
-
+				int indexSeq = rs.getInt("indexseq");
+				String selectOption = rs.getString("selectoption");
+				
 				JSONObject cusOptionObj = new JSONObject();
-
+			
 				cusOptionObj.put("id", id);
-				cusOptionObj.put("air", air);
-				cusOptionObj.put("noise", noise);
-				cusOptionObj.put("criminal", criminal);
-				cusOptionObj.put("foreigner", foreigner);
-				cusOptionObj.put("wSafeZone", wSafeZone);
-				cusOptionObj.put("traffic", traffic);
-
+				cusOptionObj.put("indexSeq", indexSeq);
+				cusOptionObj.put("selectOption", selectOption);
+				
 				cusOptionArr.add(cusOptionObj);
 			}
 			rs.close();
 			return cusOptionArr.toJSONString();
-
-		} catch (Exception ex) {
+			
+		} catch(Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-
+	
 	public String insertCusOption(String id, String option){ 
+		
 		String sql ="insert into C_OPTION values(?, indexseq.nextval, ?)"; 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
@@ -74,7 +77,47 @@ public class CusOptionDBHandle {
 			// TODO: handle exception
 			System.out.println("추가 실패");
 			return "add fail" + e.getMessage();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
+	public ArrayList<String> selectOption(String id) {
+		
+		ArrayList<String> optionArr = new ArrayList<String>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		//관심사 목록 받기
+		try {
+			String sql = String.format("select selectoption from c_option where id='%s'", id);
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				System.out.println();
+				optionArr.add(rs.getString("selectoption"));
+			}
+
+			rs.close();
+			return optionArr;
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 }
