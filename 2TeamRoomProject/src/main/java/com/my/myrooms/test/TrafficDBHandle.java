@@ -3,6 +3,7 @@ package com.my.myrooms.test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
@@ -51,6 +52,13 @@ public class TrafficDBHandle {
 
 		} catch (Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -81,6 +89,13 @@ public class TrafficDBHandle {
 			
 		}catch(Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}

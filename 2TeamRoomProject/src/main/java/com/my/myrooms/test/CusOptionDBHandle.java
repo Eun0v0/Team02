@@ -17,14 +17,19 @@ import org.springframework.stereotype.Repository;
 public class CusOptionDBHandle {
 	@Autowired
 	DataSource dataSource;
+
+	Connection conn;
+	PreparedStatement pstmt;
+	
 	public String makeJson(){
 		JSONArray cusOptionArr = new JSONArray();
 		String sql = "select * from c_option";
 		ResultSet rs = null;
 
+		
 		try {
-			Connection conn = dataSource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();	
 			
 			while(rs.next()){
@@ -44,6 +49,13 @@ public class CusOptionDBHandle {
 
 			} catch (Exception ex) {
 				return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -54,8 +66,8 @@ public class CusOptionDBHandle {
 		//관심사 목록 받기
 		try {
 			String sql = String.format("select selectoption from c_option where id='%s'", id);
-			Connection conn = dataSource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 
 			while(rs.next()) {
@@ -68,6 +80,13 @@ public class CusOptionDBHandle {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -75,8 +94,8 @@ public class CusOptionDBHandle {
 		String sql ="insert into C_OPTION values(?, indexseq.nextval, ?)"; 
 		
 		try {
-			Connection conn = dataSource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			
 			pstmt = conn.prepareStatement(sql);
@@ -90,6 +109,13 @@ public class CusOptionDBHandle {
 			// TODO: handle exception
 			System.out.println("추가 실패");
 			return "add fail" + e.getMessage();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	

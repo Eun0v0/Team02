@@ -21,14 +21,17 @@ public class SearchLogDBHandle {
 	@Autowired
 	DataSource dataSource;
 
+	Connection conn;
+	PreparedStatement pstmt;
+
 	public String makeJson() {
 		JSONArray searchLogArr = new JSONArray();
 		String sql = "select * from searchlog";
 		ResultSet rs = null;
 
 		try {
-			Connection conn = dataSource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -40,7 +43,6 @@ public class SearchLogDBHandle {
 				String gu = rs.getString("gu");
 				String dong = rs.getString("dong");
 				String searchOption = rs.getString("searchOption");
-				
 
 				JSONObject searchLogObj = new JSONObject();
 
@@ -60,17 +62,24 @@ public class SearchLogDBHandle {
 
 		} catch (Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-	
+
 	public void insertLog(String[] searchArr, CustomerModel customer) {
 
 		try {
-			Connection conn = dataSource.getConnection();
+			conn = dataSource.getConnection();
 			String sql = "INSERT INTO searchlog VALUES(?,?,?,?,?,?,?,sysdate)";
 
 			for (String key : searchArr) {
-				PreparedStatement pstmt = conn.prepareStatement(sql);
+				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, customer.getId());
 				pstmt.setInt(2, customer.getAge());
 				pstmt.setString(3, customer.getSex());
@@ -87,8 +96,14 @@ public class SearchLogDBHandle {
 
 		} catch (Exception e) {
 			System.out.println("검색Log Insert 실패");
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
-	
 
 }

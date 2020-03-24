@@ -3,6 +3,7 @@ package com.my.myrooms.test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
@@ -56,6 +57,13 @@ public class InsuranceDBHandle {
 			
 		}catch(Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -73,6 +81,13 @@ public class InsuranceDBHandle {
 			
 		}catch(Exception ex) {
 			log.info("삭제 실패: "+ex.getMessage());
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }

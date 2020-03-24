@@ -3,6 +3,7 @@ package com.my.myrooms.test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -20,14 +21,17 @@ public class WSafeZoneDBHandle {
 	@Autowired
 	DataSource dataSource;
 
+	Connection conn;
+	PreparedStatement pstmt;
+	
 	public String makeJson() {
 		JSONArray wSafeZoneArr = new JSONArray();
 		String sql = "select * from wsafezone";
 		ResultSet rs = null;
 
 		try {
-			Connection conn = dataSource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -54,6 +58,13 @@ public class WSafeZoneDBHandle {
 
 		} catch (Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -64,8 +75,8 @@ public class WSafeZoneDBHandle {
 		ResultSet rs = null;
 
 		try {
-			Connection conn = dataSource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -79,6 +90,13 @@ public class WSafeZoneDBHandle {
 
 		} catch (Exception ex) {
 			return null;
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }
