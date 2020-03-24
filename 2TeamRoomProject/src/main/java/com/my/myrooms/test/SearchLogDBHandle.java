@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
@@ -12,13 +14,12 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.my.myrooms.join.CustomerModel;
+
 @Repository
 public class SearchLogDBHandle {
 	@Autowired
 	DataSource dataSource;
-
-	Connection conn;
-	PreparedStatement pstmt;
 
 	public String makeJson() {
 		JSONArray searchLogArr = new JSONArray();
@@ -26,8 +27,8 @@ public class SearchLogDBHandle {
 		ResultSet rs = null;
 
 		try {
-			conn = dataSource.getConnection();
-			pstmt = conn.prepareStatement(sql);
+			Connection conn = dataSource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -61,4 +62,33 @@ public class SearchLogDBHandle {
 			return "Error: " + ex.getStackTrace();
 		}
 	}
+	
+	public void insertLog(String[] searchArr, CustomerModel customer) {
+
+		try {
+			Connection conn = dataSource.getConnection();
+			String sql = "INSERT INTO searchlog VALUES(?,?,?,?,?,?,?,sysdate)";
+
+			for (String key : searchArr) {
+				PreparedStatement pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, customer.getId());
+				pstmt.setInt(2, customer.getAge());
+				pstmt.setString(3, customer.getSex());
+				pstmt.setString(4, customer.getJob());
+				pstmt.setString(5, customer.getGu());
+				pstmt.setString(6, customer.getDong());
+				pstmt.setString(7, key);
+				pstmt.execute();
+
+				System.out.println(sql);
+			}
+			conn.close();
+			System.out.println("검색Log Insert 성공");
+
+		} catch (Exception e) {
+			System.out.println("검색Log Insert 실패");
+		}
+	}
+	
+
 }

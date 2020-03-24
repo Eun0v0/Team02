@@ -1,7 +1,10 @@
 package com.my.myrooms.searchlog;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,50 +18,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.my.myrooms.join.CustomerModel;
 import com.my.myrooms.test.SearchLogDBHandle;
+import com.my.myrooms.test.WSafeZoneScoreModel;
 
 @Controller
 public class SearchLogController {
 		
 	@Autowired
-	DataSource dataSource;
+	private DataSource dataSource;
 	@Autowired
-	SearchLogDBHandle searchLogDBHandle;
+	private SearchLogApi searchLogApi;
 	
 	//현재 접속중인 회원 정보
-	CustomerModel customer = new CustomerModel("jjparson", "1234", "W", 20, "GwanAk", "BonCheon", "Student");
-
-	@RequestMapping(value = "/saveLog", method = RequestMethod.GET)
-	public void saveLog(HttpServletRequest request, Model model) {
+	CustomerModel customer = new CustomerModel("eun0v0", "1234", "W", 20, "GwanAk", "BongCheon", "Student");	
+	
+	@RequestMapping(value = "/searchResult", method = RequestMethod.GET)
+	public String searchResult(HttpServletRequest request, Model model) {
 		
 		String[] searchKey = request.getParameterValues("searchKey");
+		searchLogApi.saveLog(searchKey, customer);
 		
-		try {
-			Connection conn = dataSource.getConnection();
-			String sql = "insert into searchlog values(?,?,?,?,?,?,?,sysdate)";
-			
-			for (String key : searchKey) {
-				PreparedStatement pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, customer.getId());
-				pstmt.setInt(2, customer.getAge());
-				pstmt.setString(3, customer.getSex());
-				pstmt.setString(4, customer.getJob());
-				pstmt.setString(5, customer.getGu());
-				pstmt.setString(6, customer.getDong());
-				pstmt.setString(7, key);
-				pstmt.execute();	
-			
-			}
-			conn.close();
-			System.out.println("검색Log Insert 성공");
-			
-		} catch (Exception e) {
-			System.out.println("검색Log Insert 실패");
-		}
+		ArrayList<guScoreModel> guScoreList = searchLogApi.calScore(customer.getId(), searchKey);
+		model.addAttribute("guScoreList", guScoreList);
+
+		return "searchResult";
 	}
+	
 	
 	@RequestMapping(value = "/searchMain", method = RequestMethod.GET)
 	public String searchMain(Locale locale, Model model) {
-		
+		System.out.println("~~~~~호이호이호이~~~~~");
 		return "searchMain";
 	}
 }

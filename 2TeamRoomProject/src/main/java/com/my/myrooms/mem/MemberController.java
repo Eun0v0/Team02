@@ -79,6 +79,15 @@ public class MemberController {
 	public String dummy(HttpServletResponse response, Model model) {
 		return "dummy";
 	}
+<<<<<<< HEAD
+	////
+	@RequestMapping(value = "/loginConfirm", method = RequestMethod.GET)
+	public String loginConfirm(HttpServletResponse response, Model model) {
+		String id = "dojw";
+		String pw = "qwe";
+		
+		return "mainMap";
+=======
 
 	@RequestMapping(value = "/selectID", method = RequestMethod.GET)
 	public void selectID(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -95,6 +104,7 @@ public class MemberController {
 // TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+>>>>>>> 26643e632ab8b2e63fdeb17bb93eeb71c936dcaf
 	}
 
 }
