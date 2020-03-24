@@ -17,24 +17,12 @@ import org.springframework.stereotype.Repository;
 public class CusOptionDBHandle {
 	@Autowired
 	DataSource dataSource;
-<<<<<<< HEAD
-	
 	public String makeJson(){
-=======
-
-	Connection conn;
-	PreparedStatement pstmt;
-
-	public String makeJson() {
-
-		System.out.println("aa");
->>>>>>> 26643e632ab8b2e63fdeb17bb93eeb71c936dcaf
 		JSONArray cusOptionArr = new JSONArray();
 		String sql = "select * from c_option";
 		ResultSet rs = null;
 
 		try {
-<<<<<<< HEAD
 			Connection conn = dataSource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();	
@@ -49,43 +37,16 @@ public class CusOptionDBHandle {
 				cusOptionObj.put("id", id);
 				cusOptionObj.put("indexSeq", indexSeq);
 				cusOptionObj.put("selectOption", selectOption);
-				
-=======
-			conn = dataSource.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				String id = rs.getString("id");
-				String air = rs.getString("air");
-				String noise = rs.getString("noise");
-				String criminal = rs.getString("criminal");
-				String foreigner = rs.getString("foreigner");
-				String wSafeZone = rs.getString("safezone");
-				String traffic = rs.getString("traffic");
-
-				JSONObject cusOptionObj = new JSONObject();
-
-				cusOptionObj.put("id", id);
-				cusOptionObj.put("air", air);
-				cusOptionObj.put("noise", noise);
-				cusOptionObj.put("criminal", criminal);
-				cusOptionObj.put("foreigner", foreigner);
-				cusOptionObj.put("wSafeZone", wSafeZone);
-				cusOptionObj.put("traffic", traffic);
-
->>>>>>> 26643e632ab8b2e63fdeb17bb93eeb71c936dcaf
 				cusOptionArr.add(cusOptionObj);
 			}
 			rs.close();
 			return cusOptionArr.toJSONString();
 
-		} catch (Exception ex) {
-			return "Error: " + ex.getStackTrace();
+			} catch (Exception ex) {
+				return "Error: " + ex.getStackTrace();
 		}
 	}
-<<<<<<< HEAD
-	
+
 	public ArrayList<String> selectOption(String id) {
 		
 		ArrayList<String> optionArr = new ArrayList<String>();
@@ -109,12 +70,15 @@ public class CusOptionDBHandle {
 			return null;
 		}
 	}
-}
-=======
 
 	public String insertCusOption(String id, String option){ 
 		String sql ="insert into C_OPTION values(?, indexseq.nextval, ?)"; 
+		
 		try {
+			Connection conn = dataSource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, option);
@@ -130,4 +94,4 @@ public class CusOptionDBHandle {
 	}
 	
 }
->>>>>>> 26643e632ab8b2e63fdeb17bb93eeb71c936dcaf
+
