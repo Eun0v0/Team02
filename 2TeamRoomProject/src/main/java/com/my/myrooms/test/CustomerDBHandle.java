@@ -111,4 +111,46 @@ public class CustomerDBHandle {
 			return "Error: " + ex.getStackTrace();
 		}
 	}
+	
+	public String confirmID(String sid, String spwd) {
+		System.out.println("confirm ID 호출");
+		String sql = "select id from customer where id = ? AND pwd = ?";
+		ResultSet rs = null;
+		
+		try {
+			conn = dataSource.getConnection();
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sid);
+			pstmt.setString(2, spwd);
+			
+			System.out.println(sql);
+			rs = pstmt.executeQuery();
+
+			
+			int num = 0;
+			
+			System.out.println("rs: "+ rs);
+			
+			while (rs.next()) {
+				num++;
+			}
+
+			System.out.println("num: " +num);
+			rs.close();
+			if (num > 0) {
+				System.out.println("성공");
+				return "OK";
+			}
+			else {
+				System.out.println("실패");
+				return "fail";
+			}
+
+		} catch (Exception ex) {
+			System.out.println("ERROR");
+			return "Error: " + ex.getStackTrace();
+		}
+	}
+	
 }

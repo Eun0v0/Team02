@@ -3,16 +3,12 @@
 <html>
 <head>
 <title>회원가입 처리</title>
-<script>
-	System.out.println("aa");
-</script>
+
 </head>
 <body>
-
 	<div id="wrap">
 		<br> <br> <b><font size="5" color="gray">회원가입 정보를
-				확인하세요.</font></b> <br> <br> <font color="blue">${name}</font>님 가입을
-		축하드립니다. <br> <br>
+				확인하세요.</font></b> <br> <br> <font color="blue">${name}</font>님 가입을 축하드립니다. <br> <br>
 
 		<hr>
 		<table>

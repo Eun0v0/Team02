@@ -31,6 +31,7 @@ public class MemberController {
 
 	@Autowired
 	CustomerDBHandle customerDBHandle;
+
 	@Autowired
 	CusOptionDBHandle cusOptionDBHandle;
 
@@ -54,11 +55,13 @@ public class MemberController {
 		String gu = request.getParameter("gu");
 		String dong = request.getParameter("dong");
 		String job = request.getParameter("job");
+
 		customerDBHandle.makeJson();
 		customerDBHandle.insertCustomer(id, password, name, sex, age, gu, dong, job);
 
 		String[] options = request.getParameterValues("option");
 		cusOptionDBHandle.makeJson();
+
 		for (String s : options)
 			cusOptionDBHandle.insertCusOption(id, s);
 
@@ -71,7 +74,6 @@ public class MemberController {
 		model.addAttribute("dong", dong);
 		model.addAttribute("job", job);
 
-		System.out.println("aa");
 		return "joinComplete";
 	}
 
@@ -80,13 +82,6 @@ public class MemberController {
 		return "dummy";
 	}
 
-	@RequestMapping(value = "/loginConfirm", method = RequestMethod.GET)
-	public String loginConfirm(HttpServletResponse response, Model model) {
-		String id = "dojw";
-		String pw = "qwe";
-		
-		return "mainMap";
-	}
 	@RequestMapping(value = "/selectID", method = RequestMethod.GET)
 	public void selectID(HttpServletRequest request, HttpServletResponse response, Model model) {
 		String sid = request.getParameter("id");
@@ -101,6 +96,32 @@ public class MemberController {
 		} catch (IOException e) {
 // TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value = "/confirmID", method = RequestMethod.GET)
+	public String confirmID(HttpServletRequest request, HttpServletResponse response, Model model) {
+		String sid = request.getParameter("id");
+		String spwd = request.getParameter("password");
+
+		System.out.println(sid);
+		System.out.println(spwd);
+		
+
+		try {
+			PrintWriter out = response.getWriter();
+			String result = customerDBHandle.confirmID(sid, spwd);
+			
+			if (result == "OK") {
+				return "mainMap";
+			} else {
+				model.addAttribute("msg", "NOT CORRECT");
+				model.addAttribute("NO", result);
+				return "loginForm";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "loginForm";
 		}
 	}
 

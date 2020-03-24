@@ -34,7 +34,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
 	//빈칸 여부 or 비밀번호 일치 테스트
-	System.out.println("aa");
 	function check() {
 		if (!document.joinForm.id.value) {
 			alert("id를 입력하세요.");
@@ -58,6 +57,18 @@
 			alert("생년월일을 입력하세요.");
 			return false;
 		}
+	}
+</script>
+
+<script>
+	var btn;
+	function btn_on() {
+		btn = document.getElementById('btn');
+		btn.disabled = false;//버튼활성화
+	}
+	function btn_off() {
+		btn = document.getElementById('btn');
+		btn.disabled = 'disabled';//버튼비활성화
 	}
 </script>
 
@@ -86,19 +97,22 @@
 							}
 
 							function recvID(data) {
-
-								if (data.length == 0)
-									alert("가능")
-								else
-									alert("불가능")
-
+								if (data.length == 0) {
+									alert("OK.");//가능
+									btn_on();
+								} else {
+									alert("Your Id already in use. Please Insert another ID.");//불가능
+									btn_off();
+								}
 							}
 						</script>
 					</div>
+
 				</div>
 
 				<div class="input-group">
 					<span class="input-group-addon"><i class="icon_key_alt"></i></span>
+
 					<input type="password" class="form-control" name="password"
 						placeholder="Password" autofocus>
 
@@ -112,13 +126,9 @@
 
 				<div class="input-group">
 					<span class="input-group-addon"><i class="icon_profile"></i></span>
+
 					<input type="text" class="form-control" name="name"
 						placeholder="Name" autofocus>
-				</div>
-
-				<div>
-					<input type="radio" name="sex" value="남성" checked>Man <input
-						type="radio" name="sex" value="여성" checked>Woman
 				</div>
 
 				<div class="input-group">
@@ -134,10 +144,17 @@
 						name="dong" placeholder="OO동" autofocus>
 				</div>
 
-				<input type="radio" name="job" value="무직" checked>무직 <input
-					type="radio" name="job" value="학생" checked>학생 <input
-					type="radio" name="job" value="직장인" checked>직장인 <input
-					type="radio" name="job" value="자영업" checked>자영업
+				<div>
+					<input type="radio" name="sex" value="남성" checked>Man <input
+						type="radio" name="sex" value="여성" checked>Woman
+				</div>
+
+				<div>
+					<input type="radio" name="job" value="무직" checked>무직 <input
+						type="radio" name="job" value="학생" checked>학생 <input
+						type="radio" name="job" value="직장인" checked>직장인 <input
+						type="radio" name="job" value="자영업" checked>자영업
+				</div>
 				<div>
 					<hr>
 					<br> Preference <label class="checkbox"> <input
@@ -157,26 +174,15 @@
 				</div>
 
 				<input class="btn btn-primary btn-lg btn-block" type="submit"
-					value="Sign Up" formaction="joinComplete"> <input
+					value="Sign Up" formaction="joinComplete" id="btn"
+					disabled="disabled"> <input
 					class="btn btn-primary btn-lg btn-block" type="button"
 					value="Cancel" onclick="location.href='loginForm'">
 			</div>
 
 		</form>
-		<div class="text-right">
-			<div class="credits">
-				<!--
-All the links in the footer should remain intact.
-You can delete the links only if you purchased the pro version.
-Licensing information: https://bootstrapmade.com/license/
-Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
--->
-				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-			</div>
-		</div>
 	</div>
-
-
 </body>
 
 </html>
+

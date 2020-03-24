@@ -13,8 +13,7 @@
 	content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
 <link rel="shortcut icon" href="img/favicon.png">
 
-<title>Login Page 2 | Creative - Bootstrap 3 Responsive Admin
-	Template</title>
+<title>Login Page</title>
 
 <!-- Bootstrap CSS -->
 <link href="resources/NiceAdmin/css/bootstrap.min.css" rel="stylesheet">
@@ -31,27 +30,43 @@
 <link href="resources/NiceAdmin/css/style-responsive.css"
 	rel="stylesheet" />
 
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
-<!--[if lt IE 9]>
-<script src="js/html5shiv.js"></script>
-<script src="js/respond.min.js"></script>
-<![endif]-->
+<script>
+	//빈칸 여부 or 비밀번호 일치 테스트
 
-<!-- =======================================================
-Theme Name: NiceAdmin
-Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-Author: BootstrapMade
-Author URL: https://bootstrapmade.com
-======================================================= -->
+	
+	
+	function check() {
+		if (!document.loginForm.id.value) {
+			alert("id를 입력하세요.");
+			return false;
+		} else if (!document.loginForm.password.value) {
+			alert("password를 입력하세요.");
+			return false;
+		}
+		//		else {
+		//			$.getJSON("confirmID?id=" + $('[name="id"]').val() + "&pwd="
+		//					+ $('[name="password"]').val(), recvID);
+		//		}
+	}
+
+	function recvID(data) {
+		console.log("recvID")
+		if (data.length == 0) {
+			alert("OK.");//가능
+		} else {
+			alert("Your Id already in use. Please Insert another ID.");//불가능
+			return false;
+		}
+	}
+</script>
+
 </head>
 
 <body class="login-img3-body">
-	<script>
-		System.out.println("aa");
-	</script>
+	
 	<div class="container">
 
-		<form class="login-form" action="index">
+		<form class="login-form" name="loginForm" onSubmit="return check()">
 			<div class="login-wrap">
 				<p class="login-img">
 					<i class="icon_lock_alt"></i>
@@ -66,25 +81,16 @@ Author URL: https://bootstrapmade.com
 					<input type="password" class="form-control" name="password"
 						placeholder="Password">
 				</div>
-				<label class="checkbox"> <input type="checkbox"
-					value="remember-me"> Remember me <span class="pull-right">
-						<a href="#"> Forgot Password?</a>
-				</span>
-				</label>
-				<button class="btn btn-primary btn-lg btn-block" type="submit"
-					formaction="mainMap">Login</button>
-				<button class="btn btn-info btn-lg btn-block" type="submit"
-					formaction="joinForm">Sign Up</button>
+
+				<input class="btn btn-primary btn-lg btn-block" type="submit" value="Login"
+					formaction="confirmID"> 
+					<input class="btn btn-info btn-lg btn-block" type="button" value="Sign Up"
+					onclick="location.href='joinForm'">
 			</div>
 		</form>
 		<div class="text-right">
 			<div class="credits">
-				<!--
-All the links in the footer should remain intact.
-You can delete the links only if you purchased the pro version.
-Licensing information: https://bootstrapmade.com/license/
-Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
--->
+
 				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
 			</div>
 		</div>
