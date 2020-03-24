@@ -63,4 +63,13 @@ public class InsuranceController {
 		String name = request.getParameter("name");
 		insurnaceDBHandle.deleteInsurance(name);
 	}
+	
+	@RequestMapping(value = "/basicTable", method = RequestMethod.GET)
+	public String basicTable(Locale locale, Model model) {
+		//log.info("Welcome home! The client locale is {}.", locale);
+		
+		log.info("basicTable");
+		
+		return "insurance/basicTable";
+	}
 }

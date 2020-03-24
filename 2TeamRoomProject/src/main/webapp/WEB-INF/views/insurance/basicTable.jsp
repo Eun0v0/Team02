@@ -391,8 +391,7 @@
 					<form>
 						<div class="form-group">
 							<label for="insDivision" class="col-form-label">Insurance
-								Division:</label> 
-								<input type="text" class="form-control" id="insDivision">
+								Division:</label> <input type="text" class="form-control" id="insDivision">
 						</div>
 						<div class="form-group">
 							<label for="insName" class="col-form-label">Insurance
@@ -402,12 +401,12 @@
 
 							<label for="insCategory" class="col-form-label">Category:</label>
 							<select class="form-control" id="insCategory">
-								<option value="범죄">범죄</option>
+								<option value="범죄/치안">범죄/치안</option>
 								<option value="소음공해">소음공해</option>
-								<option value="외국인거주">외국인거주</option>
-								<option value="여성안심지키미집">여성안심지키미집</option>
-								<option value="미세먼지">미세먼지</option>
-								<option value="교통사고">교통사고</option>
+								<option value="외국인 거주 현황">외국인 거주 현황</option>
+								<option value="여성 안전 지킴이 존">여성 안전 지킴이 존</option>
+								<option value="대기오염">대기오염</option>
+								<option value="교통 안전사고 현황">교통 안전사고 현황</option>
 							</select> 
 						</div>
 						<div class="form-group">
@@ -422,8 +421,8 @@
 						<div class="form-group">
 							<label for="insSex" class="col-form-label">Sex:</label>
 							 <select class="form-control" id="insSex">
-								<option value="여자">여자</option>
-								<option value="남자">남자</option>
+								<option value="여성">여성</option>
+								<option value="남성">남성</option>
 							</select> 
 						</div>
 						<div class="insImage">
@@ -468,7 +467,7 @@
 						insIndex: v.insuranceIndex,
 						
 				}
-				buttonVar += "<a class='btn btn-success' data-toggle='modal' data-target='#exampleModal' data-index='"+v.insuranceIndex+ "' data-insname='"+v.insuranceName+ "' data-icategory='"+v.category+"' data-iage='"+v.age+"' data-isex='"+v.sex+"' data-imagename='"+v.imgName+"'>";
+				buttonVar += "<a class='btn btn-success' data-toggle='modal' data-target='#exampleModal' data-index='"+v.insuranceIndex+ "' data-insname='"+v.insuranceName+ "' data-icategory='"+v.category+"' data-iage='"+v.ages+"' data-isex='"+v.sex+"' data-imagename='"+v.imgName+"'>";
 				buttonVar += "<i class='icon_check_alt2' id ='modifyIns'></i></a>";
 				
 				
@@ -509,7 +508,7 @@
 			  var button = $(event.relatedTarget) // Button that triggered the modal
 			  // var recipient = button.data('whatever')// Extract info from data-* attributes
 			  
-			  var insIndex = button.attr('data-index')
+			  var insDivision = button.attr('data-index')
 			  var insName = button.attr('data-insname') 
 			  var insCategory = button.attr('data-icategory')
 			  var insAge = button.attr('data-iage')
@@ -518,8 +517,22 @@
 			  
 			  var modal = $(this)
 			  
+			  
+			  console.log(insDivision)
+			  console.log(insName)
+			  console.log(insCategory)
+			  console.log(insAge)
+			  console.log(insSex)
+			  console.log(insImage)
+			  
 			  modal.find('.modal-title').text('Insurance Modify On ' + insName)
-			  modal.find('.modal-body input').val(insName)
+			  
+			  $('#insName').val(insName);
+			  $('#insDivision').val(insDivision);
+			  $('#insCategory').val(insCategory);
+			  $('#insAge').val(insAge);
+			  $('#insSex').val(insSex);
+			  $('#insImage').val(insImage);
 		})
 		
 	</script>
