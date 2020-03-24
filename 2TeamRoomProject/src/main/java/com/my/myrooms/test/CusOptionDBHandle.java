@@ -3,6 +3,8 @@ package com.my.myrooms.test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
@@ -15,9 +17,6 @@ import org.springframework.stereotype.Repository;
 public class CusOptionDBHandle {
 	@Autowired
 	DataSource dataSource;
-
-	Connection conn;
-	PreparedStatement pstmt;
 	
 	public String makeJson(){
 		JSONArray cusOptionArr = new JSONArray();
@@ -25,26 +24,20 @@ public class CusOptionDBHandle {
 		ResultSet rs = null;
 		
 		try {
-			conn = dataSource.getConnection();
-			pstmt = conn.prepareStatement(sql);
+			Connection conn = dataSource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();	
 			
 			while(rs.next()){
-				Boolean air = rs.getBoolean("air");
-				Boolean noise = rs.getBoolean("noise");
-				Boolean criminal = rs.getBoolean("criminal");
-				Boolean foreigner = rs.getBoolean("foreigner");
-				Boolean wSafeZone = rs.getBoolean("safezone");
-				Boolean traffic = rs.getBoolean("traffic");
+				String id = rs.getString("id");
+				int indexSeq = rs.getInt("indexseq");
+				String selectOption = rs.getString("selectoption");
 				
 				JSONObject cusOptionObj = new JSONObject();
 			
-				cusOptionObj.put("air", air);
-				cusOptionObj.put("noise", noise);
-				cusOptionObj.put("criminal", criminal);
-				cusOptionObj.put("foreigner", foreigner);
-				cusOptionObj.put("wSafeZone", wSafeZone);
-				cusOptionObj.put("traffic", traffic);
+				cusOptionObj.put("id", id);
+				cusOptionObj.put("indexSeq", indexSeq);
+				cusOptionObj.put("selectOption", selectOption);
 				
 				cusOptionArr.add(cusOptionObj);
 			}
@@ -53,6 +46,30 @@ public class CusOptionDBHandle {
 			
 		}catch(Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		}
+	}
+	
+	public ArrayList<String> selectOption(String id) {
+		
+		ArrayList<String> optionArr = new ArrayList<String>();
+		
+		//관심사 목록 받기
+		try {
+			String sql = String.format("select selectoption from c_option where id='%s'", id);
+			Connection conn = dataSource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				System.out.println();
+				optionArr.add(rs.getString("selectoption"));
+			}
+			rs.close();
+			return optionArr;
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 }

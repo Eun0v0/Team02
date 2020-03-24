@@ -78,8 +78,6 @@ public class MemberController {
 		String id = "dojw";
 		String pw = "qwe";
 		
-		
-		
 		return "mainMap";
 	}
 //	

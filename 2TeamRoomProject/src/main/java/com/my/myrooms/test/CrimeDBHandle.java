@@ -82,6 +82,5 @@ public class CrimeDBHandle {
 		}catch(Exception ex) {
 			return "Error: " + ex.getStackTrace();
 		}
-		
 	}
 }
