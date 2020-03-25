@@ -25,7 +25,6 @@ public class CustomerDBHandle {
 		String sql = "select * from customer";
 		ResultSet rs = null;
 
-		System.out.println("aa");
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -34,6 +33,7 @@ public class CustomerDBHandle {
 			while (rs.next()) {
 				String id = rs.getString("id");
 				String password = rs.getString("password");
+				String name = rs.getString("name");
 				String sex = rs.getString("sex");
 				int age = rs.getInt("age");
 				String gu = rs.getString("gu");
@@ -44,6 +44,7 @@ public class CustomerDBHandle {
 
 				customerObj.put("id", id);
 				customerObj.put("password", password);
+				customerObj.put("name", name);
 				customerObj.put("sex", sex);
 				customerObj.put("age", age);
 				customerObj.put("gu", gu);
@@ -67,10 +68,11 @@ public class CustomerDBHandle {
 		}
 	}
 
-	public String insertCustomer(String id, String password, String name, String sex, int age, String gu, String dong,
+	public void insertCustomer(String id, String password, String name, String sex, int age, String gu, String dong,
 			String job) {
 		String sql = "insert into Customer values(?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, password);
@@ -80,14 +82,12 @@ public class CustomerDBHandle {
 			pstmt.setString(6, gu);
 			pstmt.setString(7, dong);
 			pstmt.setString(8, job);
+			
 			pstmt.execute();
 
-			System.out.println("추가 성공");
-			return "add success";
+			System.out.println("Cus info 추가 성공");
 		} catch (Exception e) {
-// TODO: handle exception
-			System.out.println("추가 실패");
-			return "add fail" + e.getMessage();
+			System.out.println("Cus info 추가 실패");
 		} finally {
 			try {
 				conn.close();
@@ -112,11 +112,9 @@ public class CustomerDBHandle {
 
 			while (rs.next()) {
 				String id = rs.getString("id");
-
 				JSONObject customerObj = new JSONObject();
 
 				customerObj.put("id", id);
-
 				customerArr.add(customerObj);
 			}
 			rs.close();
@@ -148,7 +146,6 @@ public class CustomerDBHandle {
 			
 			System.out.println(sql);
 			rs = pstmt.executeQuery();
-
 			
 			int num = 0;
 			
@@ -158,7 +155,7 @@ public class CustomerDBHandle {
 				num++;
 			}
 
-			System.out.println("num: " +num);
+			System.out.println("num: " + num);
 			rs.close();
 			if (num > 0) {
 				System.out.println("성공");

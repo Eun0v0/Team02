@@ -98,7 +98,7 @@
 
 							function recvID(data) {
 								if (data.length == 0) {
-									alert("OK.");//가능
+									alert("OK. You can use this ID");//가능
 									btn_on();
 								} else {
 									alert("Your Id already in use. Please Insert another ID.");//불가능

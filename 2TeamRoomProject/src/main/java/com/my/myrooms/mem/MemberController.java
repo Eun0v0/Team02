@@ -77,11 +77,6 @@ public class MemberController {
 		return "joinComplete";
 	}
 
-	@RequestMapping(value = "/dummy", method = RequestMethod.GET)
-	public String dummy(HttpServletResponse response, Model model) {
-		return "dummy";
-	}
-
 	@RequestMapping(value = "/selectID", method = RequestMethod.GET)
 	public void selectID(HttpServletRequest request, HttpServletResponse response, Model model) {
 		String sid = request.getParameter("id");

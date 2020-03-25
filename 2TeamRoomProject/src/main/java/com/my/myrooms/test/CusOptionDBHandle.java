@@ -90,25 +90,23 @@ public class CusOptionDBHandle {
 		}
 	}
 
-	public String insertCusOption(String id, String option){ 
+	public void insertCusOption(String id, String option){ 
 		String sql ="insert into C_OPTION values(?, indexseq.nextval, ?)"; 
 		
 		try {
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			ResultSet rs = pstmt.executeQuery();
 			
-			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			pstmt.setString(2, option);
 			pstmt.execute();
 			
-			System.out.println("추가 성공");
-			return "add success";
+			System.out.println("option 추가 성공");
+			//return "add success";
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("추가 실패");
-			return "add fail" + e.getMessage();
+			System.out.println("option 추가 실패");
+			//return "add fail" + e.getMessage();
 		} finally {
 			try {
 				conn.close();
