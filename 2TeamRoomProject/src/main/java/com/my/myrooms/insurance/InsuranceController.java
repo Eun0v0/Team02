@@ -70,6 +70,64 @@ public class InsuranceController {
 		
 		log.info("basicTable");
 		
-		return "insurance/basicTable";
+		return "insurance/insuranceManage";
+	}
+	
+	@RequestMapping(value = "/updateInsurance", method = RequestMethod.GET)
+	public String updateInsurance(HttpServletResponse response, HttpServletRequest request, Model model) {
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=UTF-8");
+
+		String index = request.getParameter("insDivision");
+		String name = request.getParameter("insName");
+		String category = request.getParameter("insCategory");
+		String ages = request.getParameter("insAge");
+		String sex = request.getParameter("insSex");
+		String imgname = request.getParameter("insImage");
+		
+		insurnaceDBHandle.updateInsurance(index, name, category, ages, sex, imgname);
+	
+		try {
+			PrintWriter out = response.getWriter();
+			String jsonStr = insurnaceDBHandle.makeJson();
+			
+			if (jsonStr != null) {
+				//out.print(jsonStr);
+				out.flush();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
+		return "insurance/insuranceManage";
+	}
+
+	@RequestMapping(value = "/insertInsurance", method = RequestMethod.GET)
+	public String insertInsurance(HttpServletResponse response, HttpServletRequest request, Model model) {
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=UTF-8");
+
+		String index = request.getParameter("insDivision");
+		String name = request.getParameter("insName");
+		String category = request.getParameter("insCategory");
+		String ages = request.getParameter("insAge");
+		String sex = request.getParameter("insSex");
+		String imgname = request.getParameter("insImage");
+		
+		insurnaceDBHandle.insertInsurance(index, name, category, ages, sex, imgname);
+	
+		try {
+			PrintWriter out = response.getWriter();
+			String jsonStr = insurnaceDBHandle.makeJson();
+			
+			if (jsonStr != null) {
+				//out.print(jsonStr);
+				out.flush();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
+		return "insurance/insuranceManage";
 	}
 }

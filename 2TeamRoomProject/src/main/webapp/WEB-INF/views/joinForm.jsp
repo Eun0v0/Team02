@@ -78,7 +78,7 @@
 
 	<div class="container">
 
-		<form class="login-form" name="joinForm" onSubmit="return check()">
+		<form class="login-form" name="joinForm" onSubmit="return check()" method="POST">
 			<div class="login-wrap">
 				<p class="login-img">
 					<i class="icon_lock_alt"></i>

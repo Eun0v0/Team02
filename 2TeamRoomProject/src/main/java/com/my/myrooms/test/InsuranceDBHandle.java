@@ -68,7 +68,6 @@ public class InsuranceDBHandle {
 	}
 	
 	public void deleteInsurance(String name){
-		JSONArray insuranceArr = new JSONArray();
 		String sql="delete from insurance where insurancename=?";
 		
 		try {
@@ -81,6 +80,63 @@ public class InsuranceDBHandle {
 			
 		}catch(Exception ex) {
 			log.info("삭제 실패: "+ex.getMessage());
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void updateInsurance(String index, String name, String category, String ages, String sex, String imgname){
+		JSONArray insuranceArr = new JSONArray();
+		String sql="update insurance set insuranceIndex=?, insurancename=?, category=?, ages=?,sex=?,imgname=? where insurancename=?";
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, index);
+			pstmt.setString(2, name);
+			pstmt.setString(3, category);
+			pstmt.setString(4, ages);
+			pstmt.setString(5, sex);
+			pstmt.setString(6, imgname);
+			pstmt.setString(7, name);
+			
+			pstmt.executeUpdate();	
+			log.info("수정 성공");
+			
+		}catch(Exception ex) {
+			log.info("수정 실패: "+ex.getMessage());
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void insertInsurance(String index, String name, String category, String ages, String sex, String imgname){
+		JSONArray insuranceArr = new JSONArray();
+		String sql="insert into insurance values(?,?,?,?,?,?)";
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, index);
+			pstmt.setString(2, name);
+			pstmt.setString(3, category);
+			pstmt.setString(4, ages);
+			pstmt.setString(5, sex);
+			pstmt.setString(6, imgname);
+			
+			pstmt.execute();	
+			log.info("수정 성공");
+			
+		}catch(Exception ex) {
+			log.info("수정 실패: "+ex.getMessage());
 		} finally {
 			try {
 				conn.close();

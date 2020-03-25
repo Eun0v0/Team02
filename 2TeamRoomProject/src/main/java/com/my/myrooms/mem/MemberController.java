@@ -2,6 +2,7 @@ package com.my.myrooms.mem;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -35,7 +36,7 @@ public class MemberController {
 	@Autowired
 	CusOptionDBHandle cusOptionDBHandle;
 
-	@RequestMapping(value = "/loginForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/loginForm", method = RequestMethod.POST)
 	public String loginFormFn(HttpServletResponse response, Model model) {
 		return "loginForm";
 	}
@@ -45,36 +46,46 @@ public class MemberController {
 		return "joinForm";
 	}
 
-	@RequestMapping(value = "/joinComplete", method = RequestMethod.GET)
+	@RequestMapping(value = "/joinComplete", method = RequestMethod.POST)
 	public String joinCompleteFn(HttpServletRequest request, Model model) {
-		String id = request.getParameter("id");
-		String password = request.getParameter("password");
-		String name = request.getParameter("name");
-		String sex = request.getParameter("sex");
-		int age = Integer.parseInt(request.getParameter("age"));
-		String gu = request.getParameter("gu");
-		String dong = request.getParameter("dong");
-		String job = request.getParameter("job");
+		
+		try {
+			request.setCharacterEncoding("utf-8");
+			String id = request.getParameter("id");
+			String password = request.getParameter("password");
+			String name = request.getParameter("name");
+			String sex = request.getParameter("sex");
+			int age = Integer.parseInt(request.getParameter("age"));
+			String gu = request.getParameter("gu");
+			String dong = request.getParameter("dong");
+			String job = request.getParameter("job");
 
-		customerDBHandle.makeJson();
-		customerDBHandle.insertCustomer(id, password, name, sex, age, gu, dong, job);
+			customerDBHandle.makeJson();
+			customerDBHandle.insertCustomer(id, password, name, sex, age, gu, dong, job);
 
-		String[] options = request.getParameterValues("option");
-		cusOptionDBHandle.makeJson();
+			String[] options = request.getParameterValues("option");
+			cusOptionDBHandle.makeJson();
 
-		for (String s : options)
-			cusOptionDBHandle.insertCusOption(id, s);
+			for (String s : options)
+				cusOptionDBHandle.insertCusOption(id, s);
 
-		model.addAttribute("id", id);
-		model.addAttribute("password", password);
-		model.addAttribute("name", name);
-		model.addAttribute("sex", sex);
-		model.addAttribute("age", age);
-		model.addAttribute("gu", gu);
-		model.addAttribute("dong", dong);
-		model.addAttribute("job", job);
+			model.addAttribute("id", id);
+			model.addAttribute("password", password);
+			model.addAttribute("name", name);
+			model.addAttribute("sex", sex);
+			model.addAttribute("age", age);
+			model.addAttribute("gu", gu);
+			model.addAttribute("dong", dong);
+			model.addAttribute("job", job);
 
-		return "joinComplete";
+			return "joinComplete";
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			
+			//return "error" + e.getMessage();
+			return "joinForm";
+		}
+		
 	}
 
 	@RequestMapping(value = "/selectID", method = RequestMethod.GET)
