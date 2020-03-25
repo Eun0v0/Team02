@@ -222,7 +222,7 @@
 					<li class="dropdown"><a data-toggle="dropdown"
 						class="dropdown-toggle" href="#"> <span class="profile-ava">
 								<img alt="" src="resources/NiceAdmin/img/avatar1_small.jpg">
-						</span> <span class="username">Jenifer Smith</span> <b class="caret"></b>
+						</span> <span class="username">${id}</span> <b class="caret"></b>
 					</a>
 						<ul class="dropdown-menu extended logout">
 							<div class="log-arrow-up"></div>

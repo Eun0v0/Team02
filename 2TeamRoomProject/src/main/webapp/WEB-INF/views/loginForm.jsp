@@ -47,7 +47,7 @@
 		}
 	}
 
-	<c:if test="${msg != ''}">
+	<c:if test="${not empty msg}">
 		alert("${msg}");
 	</c:if>
 	

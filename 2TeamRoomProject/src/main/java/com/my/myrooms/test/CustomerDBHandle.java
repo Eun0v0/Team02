@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
@@ -122,6 +123,43 @@ public class CustomerDBHandle {
 
 		} catch (Exception ex) {
 			return "Error: " + ex.getStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public ArrayList<String> getCustomerInfo(String sid) {
+		String sql = "select id, age, sex, job from customer where id = ?";
+		ResultSet rs = null;
+
+		ArrayList<String> cus = new ArrayList<String>();
+		try {
+			conn = dataSource.getConnection();
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sid);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String id = rs.getString("id");
+				int age = rs.getInt("age");
+				String sex = rs.getString("sex");
+				String job = rs.getString("job");
+				cus.add(id);
+				cus.add(String.valueOf(age));
+				cus.add(sex);
+				cus.add(job);
+			}
+			rs.close();
+			return cus;
+
+		} catch (Exception ex) {
+			return cus;
 		} finally {
 			try {
 				conn.close();

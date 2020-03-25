@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -37,6 +38,8 @@ public class MemberController {
 	@Autowired
 	CusOptionDBHandle cusOptionDBHandle;
 
+	HttpSession session;
+	
 	@RequestMapping(value = "/loginForm")
 	public String loginFormFn(HttpServletRequest request, HttpServletResponse response, Model model) {
 		return "loginForm";
@@ -117,10 +120,14 @@ public class MemberController {
 			
 
 			if (result == "OK") {
-
-				HttpSession session = request.getSession();
-				session.setAttribute("id", sid);
 				
+				session = request.getSession();
+				ArrayList<String> cusInfo = customerDBHandle.getCustomerInfo(sid);
+				
+				session.setAttribute("id", cusInfo.get(0));
+				session.setAttribute("age", cusInfo.get(1));
+				session.setAttribute("sex", cusInfo.get(2));
+				session.setAttribute("job", cusInfo.get(3));
 				
 				redirectAttributes.addFlashAttribute("msg", "");
 				return "redirect:/mainMap";
