@@ -119,7 +119,6 @@ public class MemberController {
 			if (result == "OK") {
 
 				HttpSession session = request.getSession();
-				
 				session.setAttribute("id", sid);
 				
 				

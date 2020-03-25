@@ -17,9 +17,9 @@
 	Template</title>
 
 <!-- Bootstrap CSS -->
-<link href="resources/NiceAdmin/css/bootstrap.min.css" rel="stylesheet">
+<link href="resources/NiceAdmin/css/bootstrap.min.css?2" rel="stylesheet">
 <!-- bootstrap theme -->
-<link href="resources/NiceAdmin/css/bootstrap-theme.css"
+<link href="resources/NiceAdmin/css/bootstrap-theme.css?2"
 	rel="stylesheet">
 <!--external css-->
 <!-- font icon -->
@@ -28,7 +28,7 @@
 <link href="resources/NiceAdmin/css/font-awesome.min.css"
 	rel="stylesheet" />
 <!-- Custom styles -->
-<link href="resources/NiceAdmin/css/style.css" rel="stylesheet">
+<link href="resources/NiceAdmin/css/style.css?2" rel="stylesheet">
 <link href="resources/NiceAdmin/css/style-responsive.css"
 	rel="stylesheet" />
 
@@ -54,8 +54,9 @@
 <body>
 	<!-- container section start -->
 	<section id="container" class="">
-		<!--header start-->
-		<header class="header dark-bg">
+
+
+		<header class="header green2-bg">
 			<div class="toggle-nav">
 				<div class="icon-reorder tooltips"
 					data-original-title="Toggle Navigation" data-placement="bottom">
@@ -64,20 +65,8 @@
 			</div>
 
 			<!--logo start-->
-			<a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
+			<a href="mainMap" class="logo" align="center"><span class="lite"><img src="resources/NiceAdmin/img/자취핫플로고.png" height=100px ></span></a>
 			<!--logo end-->
-
-			<div class="nav search-row" id="top_menu">
-				<!--  search form start -->
-				<ul class="nav top-menu">
-					<li>
-						<form class="navbar-form">
-							<input class="form-control" placeholder="Search" type="text">
-						</form>
-					</li>
-				</ul>
-				<!--  search form end -->
-			</div>
 
 			<div class="top-nav notification-row">
 				<!-- notificatoin dropdown start-->
@@ -86,12 +75,12 @@
 					<!-- task notificatoin start -->
 					<li id="task_notificatoin_bar" class="dropdown"><a
 						data-toggle="dropdown" class="dropdown-toggle" href="#"> <i
-							class="icon-task-l"></i> <span class="badge bg-important">5</span>
+							class="icon-task-l"></i> <span class="badge bg-important">6</span>
 					</a>
 						<ul class="dropdown-menu extended tasks-bar">
 							<div class="notify-arrow notify-arrow-blue"></div>
 							<li>
-								<p class="blue">You have 5 pending tasks</p>
+								<p class="blue">You have 6 pending letter</p>
 							</li>
 							<li><a href="#">
 									<div class="task-info">
@@ -179,20 +168,20 @@
 								</span> <span class="message"> I really like this admin panel. </span>
 							</a></li>
 							<li><a href="#"> <span class="photo"><img
-										alt="avatar" src="resources/NiceAdmin/img/avatar-mini2.jpg"></span>
+										alt="avatar" src="./resources/NiceAdmin/img/avatar-mini2.jpg"></span>
 									<span class="subject"> <span class="from">Bob
 											Mckenzie</span> <span class="time">5 mins</span>
 								</span> <span class="message"> Hi, What is next project plan? </span>
 							</a></li>
 							<li><a href="#"> <span class="photo"><img
-										alt="avatar" src="resources/NiceAdmin/img/avatar-mini3.jpg"></span>
+										alt="avatar" src="./resources/NiceAdmin/img/avatar-mini3.jpg"></span>
 									<span class="subject"> <span class="from">Phillip
 											Park</span> <span class="time">2 hrs</span>
 								</span> <span class="message"> I am like to buy this Admin
 										Template. </span>
 							</a></li>
 							<li><a href="#"> <span class="photo"><img
-										alt="avatar" src="resources/NiceAdmin/img/avatar-mini4.jpg"></span>
+										alt="avatar" src="./resources/NiceAdmin/img/avatar-mini4.jpg"></span>
 									<span class="subject"> <span class="from">Ray
 											Munoz</span> <span class="time">1 day</span>
 								</span> <span class="message"> Icon fonts are great. </span>
@@ -243,8 +232,7 @@
 							<li><a href="#"><i class="icon_clock_alt"></i> Timeline</a>
 							</li>
 							<li><a href="#"><i class="icon_chat_alt"></i> Chats</a></li>
-							<li><a href="login.html"><i class="icon_key_alt"></i>
-									Log Out</a></li>
+							<li><a href="login"><i class="icon_key_alt"></i> Log Out</a></li>
 							<li><a href="documentation.html"><i class="icon_key_alt"></i>
 									Documentation</a></li>
 							<li><a href="documentation.html"><i class="icon_key_alt"></i>
@@ -262,9 +250,8 @@
 			<div id="sidebar" class="nav-collapse ">
 				<!-- sidebar menu start-->
 				<ul class="sidebar-menu">
-					<li class=""><a class="" href="index.html"> <i
-							class="icon_house_alt"></i> <span>Dashboard</span>
-					</a></li>
+					<li class="active"><a class="" href="mainMap"> <i
+							class="icon_house_alt"></i> <spa> Home </span></a></li>
 					<li class="sub-menu"><a href="javascript:;" class=""> <i
 							class="icon_document_alt"></i> <span>Forms</span> <span
 							class="menu-arrow arrow_carrot-right"></span>
@@ -279,7 +266,7 @@
 							class="menu-arrow arrow_carrot-right"></span>
 					</a>
 						<ul class="sub">
-							<li><a class="" href="general.html">Components</a></li>
+							<li><a class="" href="general.html">Elements</a></li>
 							<li><a class="" href="buttons.html">Buttons</a></li>
 							<li><a class="" href="grids.html">Grids</a></li>
 						</ul></li>
@@ -296,8 +283,7 @@
 							class="menu-arrow arrow_carrot-right"></span>
 					</a>
 						<ul class="sub">
-							<li><a class="active" href="basic_table.html">Basic
-									Table</a></li>
+							<li><a class="" href="insuranceManage">Basic Table</a></li>
 						</ul></li>
 
 					<li class="sub-menu"><a href="javascript:;" class=""> <i
@@ -313,10 +299,13 @@
 							<li><a class="" href="blank.html">Blank Page</a></li>
 							<li><a class="" href="404.html">404 Error</a></li>
 						</ul></li>
+
 				</ul>
+				<!-- sidebar menu end-->
 			</div>
 		</aside>
-
+		<!--sidebar end-->
+		
 		<!--main content start-->
 		<section id="main-content">
 			<section class="wrapper">

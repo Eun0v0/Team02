@@ -18,7 +18,7 @@
 <!-- Bootstrap CSS -->
 <link href="resources/NiceAdmin/css/bootstrap.min.css" rel="stylesheet">
 <!-- bootstrap theme -->
-<link href="resources/NiceAdmin/css/bootstrap-theme.css"
+<link href="resources/NiceAdmin/css/bootstrap-theme.css?2"
 	rel="stylesheet">
 <!--external css-->
 <!-- font icon -->
@@ -45,7 +45,7 @@
 <!-- Custom styles -->
 <link rel="stylesheet" href="resources/NiceAdmin/css/fullcalendar.css">
 <link href="resources/NiceAdmin/css/widgets.css" rel="stylesheet">
-<link href="resources/NiceAdmin/css/style.css" rel="stylesheet">
+<link href="resources/NiceAdmin/css/style.css?2" rel="stylesheet">
 <link href="resources/NiceAdmin/css/style-responsive.css"
 	rel="stylesheet" />
 <link href="resources/NiceAdmin/css/xcharts.min.css" rel=" stylesheet">
@@ -82,8 +82,7 @@
 	font-weight: bold;
 	overflow: hidden;
 	background: #d95050;
-	background: #d95050
-		no-repeat right 14px center;
+	background: #d95050 no-repeat right 14px center;
 }
 
 .customoverlay .title {
@@ -117,7 +116,7 @@
 	<section id="container" class="">
 
 
-		<header class="header dark-bg">
+		<header class="header green2-bg">
 			<div class="toggle-nav">
 				<div class="icon-reorder tooltips"
 					data-original-title="Toggle Navigation" data-placement="bottom">
@@ -126,20 +125,8 @@
 			</div>
 
 			<!--logo start-->
-			<a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
+			<a href="mainMap" class="logo" align="center"><span class="lite"><img src="resources/NiceAdmin/img/자취핫플로고.png" height=100px ></span></a>
 			<!--logo end-->
-
-			<div class="nav search-row" id="top_menu">
-				<!--  search form start -->
-				<ul class="nav top-menu">
-					<li>
-						<form class="navbar-form">
-							<input class="form-control" placeholder="Search" type="text">
-						</form>
-					</li>
-				</ul>
-				<!--  search form end -->
-			</div>
 
 			<div class="top-nav notification-row">
 				<!-- notificatoin dropdown start-->
@@ -383,11 +370,11 @@
 		<section id="main-content">
 			<section class="wrapper">
 				<!--overview start-->
-				<div class="row">
+				<div class="row" style="height:100px">
 					<div class="col-lg-12">
-						<h3 class="page-header">
-							<i class="fa fa-laptop"></i> Dashboard
-						</h3>
+						<h2 class="page-header">
+							<i class="fa fa-laptop"></i>Main
+						</h2>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a href="mainMap">Home</a></li>
 							<li><i class="fa fa-laptop"></i>Dashboard</li>
@@ -395,50 +382,7 @@
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-						<div class="info-box blue-bg">
-							<i class="fa fa-cloud-download"></i>
-							<div class="count">6.674</div>
-							<div class="title">Download</div>
-						</div>
-						<!--/.info-box-->
-					</div>
-					<!--/.col-->
-
-					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-						<div class="info-box brown-bg">
-							<i class="fa fa-shopping-cart"></i>
-							<div class="count">7.538</div>
-							<div class="title">Purchased</div>
-						</div>
-						<!--/.info-box-->
-					</div>
-					<!--/.col-->
-
-					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-						<div class="info-box dark-bg">
-							<i class="fa fa-thumbs-o-up"></i>
-							<div class="count">4.362</div>
-							<div class="title">Order</div>
-						</div>
-						<!--/.info-box-->
-					</div>
-					<!--/.col-->
-
-					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-						<div class="info-box green-bg">
-							<i class="fa fa-cubes"></i>
-							<div class="count">1.426</div>
-							<div class="title">Stock</div>
-						</div>
-						<!--/.info-box-->
-					</div>
-					<!--/.col-->
-
-				</div>
-				<!--/.row-->
-
+				
 
 				<div class="row">
 					<div class="col-lg-9 col-md-12">
@@ -446,8 +390,8 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h2>
-									<i class="fa fa-map-marker red"></i>
-									<strong>항목별 지도보기    ( 상위 30%: 좋음 / 하위 30%: 나쁨 )</strong>
+									<i class="fa fa-map-marker red"></i> <strong>항목별 지도보기
+										( 상위 30%: 좋음 / 하위 30%: 나쁨 )</strong>
 								</h2>
 								<div class="panel-actions">
 									<a href="mainMap" class="btn-setting"><i
@@ -462,7 +406,7 @@
 
 						</div>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-3"><br><br>
 						<label for="favors">옵션 선택 : </label> <br> <input type="radio"
 							name="favor" value="finedust">공기<br> <input
 							type="radio" name="favor" value="noise">소음 <br> <input
@@ -1131,15 +1075,14 @@
         });
       });
 
-      //custom select box
-
       $(function() {
         $('select.styled').customSelect();
       });
 
-      var positions = [];//전체 정보
-      var selectOption = ""; //선택된 옵션 정보
-	  var map; 
+      positions = [];//전체 정보
+      selectOption = ""; //선택된 옵션 정보
+	  map;
+      circles= []
       
       $(function(){
     	  $.getJSON("showWSafeZone", recvJson)
@@ -1157,24 +1100,40 @@
     	    $.each(data, (i, v) => {
     	        var position = { score: 0, latlng: new kakao.maps.LatLng(0, 0) } //정보 하나씩
     	        position.latlng = new kakao.maps.LatLng(v.latitude, v.longitude)
-    	        position.score = v.score;
+    	        
+    	        if(v.score == null)
+    	        	position.score = 0;
+    	        else
+    	        	position.score = v.score;
     	        positions.push(position)
     	    })
-    	    makeMap() 
+    	    for(var j=0; j<circles.length; j++){
+    	    	circles[j].setMap(null);
+    	    }
+    	    circles=[];
+    	    for (var i = 0, len = positions.length; i < len; i++) {
+        	  drawCircles(positions[i]);
+          }
       }
       
       function recvJson(data) {
-  	    //console.log(data)
   	    positions = []
   	    $.each(data, (i, v) => {
-  	        var position = { title: '', latlng: new kakao.maps.LatLng(0, 0) } //정보 하나씩
+  	        var position = { score: 0, latlng: new kakao.maps.LatLng(0, 0) } //정보 하나씩
   	        position.latlng = new kakao.maps.LatLng(v.latitude, v.longitude)
+  	      	position.score = 0;
   	        positions.push(position)
   	    })
+  	    
   	    makeMap() 
+  	    for (var i = 0, len = positions.length; i < len; i++) {
+  	    	  drawCircles(positions[i]);
+          }
   	}
       
       function makeMap() {
+    	  map = null;
+    	  var mapContainer = null;
           mapContainer = document.getElementById("map")    // 지도를 표시할 DIV
           mapOption = {
               center: new kakao.maps.LatLng(37.5092956, 127.0554639)    // 지도의 중심좌표
@@ -1184,70 +1143,50 @@
           map = new kakao.maps.Map(mapContainer, mapOption),
           customOverlay = new kakao.maps.CustomOverlay({}),
           infowindow = new kakao.maps.InfoWindow({removable: true});
-          
-          for (var i = 0, len = positions.length; i < len; i++) {
-        	  drawCircles(positions[i]);
-        	}
+          mapContainer.onmousewheel =  function(e) {
+              e.stopPropagation();
+            }
+		  
       }
       
       function drawCircles(positions){
-    	// 지도에 표시할 원을 생성합니다
+    		// 지도에 표시할 원을 생성합니다
 		    var circle = new kakao.maps.Circle({
 			center : positions.latlng, // 원의 중심좌표 입니다 
 			radius : 200, // 미터 단위의 원의 반지름입니다 
 			strokeWeight : 0, // 선의 두께입니다 
-			//strokeColor : '#FF6C6C', // 선의 색깔입니다
-			//strokeOpacity : 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-			//strokeStyle : 'dash', // 선의 스타일 입니다
-			fillColor : '#FF6C6C', // 채우기 색깔입니다
+			fillColor : '#CD3B3B', // 채우기 색깔입니다
 			fillOpacity : 0.7 // 채우기 불투명도 입니다   
 			 });
         
 	       if(selectOption=="noise"||selectOption=="criminal"||selectOption=="finedust"){
 	      	 circle.setRadius(2000);
 	      	 
-	      	 if(1<=positions.score && positions.score <=3) //나쁨
+	      	 if(0<=positions.score && positions.score <=3) //나쁨
 	      	 	circle.setOptions({fillColor: '#CD3B3B'}); 
 	      	 else if (4<=positions.score && positions.score <=7) //보통
 	      		 circle.setOptions({fillColor: '#FF7171'}); 
 	      	 else //좋음
 	      		 circle.setOptions({fillColor: '#FFB9B9'});
+	      	 
 	       }
        
 	    // 다각형에 mouseover 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 변경합니다 
 	       // 지역명을 표시하는 커스텀오버레이를 지도위에 표시합니다
 	       kakao.maps.event.addListener(circle, 'mouseover', function(mouseEvent) {
-	           
-	    	   //console.log("OK")
 	    	   circle.setOptions({fillColor: '#FFEAEA'});
-	    	   
-	    	   /* var content = '점수 정보: ' + positions.score ;
-	    		
-	    	   customOverlay.setContent('<div style="color:black">점수 : ' + positions.score +'</div>');
-	           
-	           customOverlay.setPosition(mouseEvent.latLng); 
-	           customOverlay.setMap(map);  */
 	       });
 	
-	       // 다각형에 mousemove 이벤트를 등록하고 이벤트가 발생하면 커스텀 오버레이의 위치를 변경합니다 
-	       /* kakao.maps.event.addListener(circle, 'mousemove', function(mouseEvent) {
-	           
-	           customOverlay.setPosition(mouseEvent.latLng); 
-	       }); */
-	 
-	 		
-	 
 	       // 다각형에 mouseout 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 원래색으로 변경합니다
 	       // 커스텀 오버레이를 지도에서 제거합니다 
 	       kakao.maps.event.addListener(circle, 'mouseout', function() {
-	    	   if(1<=positions.score && positions.score <=3) //나쁨
+	    	   if(0<=positions.score && positions.score <=3) //나쁨
 		      	 	circle.setOptions({fillColor: '#CD3B3B'}); 
 		      	 else if (4<=positions.score && positions.score <=7) //보통
 		      		 circle.setOptions({fillColor: '#FF7171'}); 
 		      	 else //좋음
 		      		 circle.setOptions({fillColor: '#FFB9B9'});
 	    	   
-	    	   //customOverlay.setMap(null);
 	       }); 
 
 	       // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
@@ -1262,7 +1201,7 @@
 	    	   else if (selectOption=="finedust")
 	    		   optionName = "미세먼지"
 	    	   else
-	    		   optionName = "정도"
+	    		   circle.setClickable(false);
 	    		   
 	    		   
 	    	   console.log(optionName)
@@ -1274,19 +1213,17 @@
 		      		 scoreText = "좋음"   
 	       	   
 	    	   var content = '<div class="customoverlay"><a><span class="title">' + optionName +': ' + scoreText + '</span></a></div>';
-	           
-	           /* infowindow.setContent(content); 
-	           infowindow.setPosition(mouseEvent.latLng); 
-	           infowindow.setMap(map); */
-  
+	
 	    	   customOverlay.setContent(content);
 	           customOverlay.setPosition(mouseEvent.latLng); 
 	           customOverlay.setMap(map);
 	           
 	       });
 	
+	        circles.push(circle)
 			// 지도에 원을 표시합니다 
-			circle.setMap(map);  
+			circle.setMap(map);
+			
       }
     </script>
 
