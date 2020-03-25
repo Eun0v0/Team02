@@ -29,7 +29,7 @@ public class SearchLogController {
 	private SearchLogApi searchLogApi;
 	
 	//현재 접속중인 회원 정보
-	CustomerModel customer = new CustomerModel("eun0v0", "1234", "W", 20, "GwanAk", "BongCheon", "Student");	
+	CustomerModel customer = new CustomerModel("jjparson", "1234", "W", 20, "GwanAk", "BongCheon", "Student");	
 	
 	@RequestMapping(value = "/searchResult", method = RequestMethod.GET)
 	public String searchResult(HttpServletRequest request, Model model) {
@@ -37,9 +37,12 @@ public class SearchLogController {
 		String[] searchKey = request.getParameterValues("searchKey");
 		searchLogApi.saveLog(searchKey, customer);
 		
-		ArrayList<guScoreModel> guScoreList = searchLogApi.calScore(customer.getId(), searchKey);
-		model.addAttribute("guScoreList", guScoreList);
-
+		//ArrayList<GuScoreModel> guScoreList = searchLogApi.calScore(customer.getId(), searchKey);
+		//model.addAttribute("guScoreList", guScoreList);
+		
+		String jsonStr = searchLogApi.calScore(customer.getId(), searchKey);
+		model.addAttribute("guScoreList", jsonStr);
+		
 		return "searchResult";
 	}
 	

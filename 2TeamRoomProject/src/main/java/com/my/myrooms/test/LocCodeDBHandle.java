@@ -4,8 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
@@ -13,6 +12,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.my.myrooms.searchlog.GuScoreModel;
 
 @Repository
 public class LocCodeDBHandle {
@@ -64,25 +65,28 @@ public class LocCodeDBHandle {
 		}
 	}
 
-	public Map<Integer, Integer> getGuCode() {
+	public ArrayList<GuScoreModel> getGuCode() {
 
-		Map<Integer, Integer> guCodeMap = new HashMap<Integer, Integer>();
+		ArrayList<GuScoreModel> guCodeArr = new ArrayList<GuScoreModel>();
 
-		String sql = "SELECT gucode FROM loccode GROUP BY gucode";
+		String sql = "SELECT gu, gucode, lati, logti FROM loccode GROUP BY gu, gucode, lati, logti";
 		ResultSet rs = null;
 
 		try {
-			Connection conn = dataSource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
+				String gu = rs.getString("gu");
 				int guCode = rs.getInt("gucode");
-				if (!guCodeMap.containsKey(guCode))
-					guCodeMap.put(guCode, 0);
+				double latitude = rs.getDouble("lati");
+				double longitude = rs.getDouble("logti");
+				
+				guCodeArr.add(new GuScoreModel(gu, guCode, 0, latitude, longitude));
 			}
 			rs.close();
-			return guCodeMap;
+			return guCodeArr;
 
 		} catch (Exception ex) {
 			return null;
@@ -95,21 +99,5 @@ public class LocCodeDBHandle {
 			}
 		}
 	}
-	/*
-	 * public Map<Integer, Integer> getDongCode() {
-	 * 
-	 * Map<Integer, Integer> dongCodeMap = new HashMap<Integer, Integer>();
-	 * 
-	 * String sql = "SELECT dongcode FROM loccode WHERE dongcode IS NOT NULL";
-	 * ResultSet rs = null;
-	 * 
-	 * try { Connection conn = dataSource.getConnection(); PreparedStatement pstmt =
-	 * conn.prepareStatement(sql); rs = pstmt.executeQuery();
-	 * 
-	 * while (rs.next()) { int dongCode = rs.getInt("dongcode"); if
-	 * (!dongCodeMap.containsKey(dongCode)) dongCodeMap.put(dongCode, 0); }
-	 * rs.close(); return dongCodeMap;
-	 * 
-	 * } catch (Exception ex) { return null; } }
-	 */
+	
 }

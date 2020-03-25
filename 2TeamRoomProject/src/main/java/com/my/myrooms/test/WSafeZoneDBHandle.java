@@ -71,7 +71,7 @@ public class WSafeZoneDBHandle {
 	public ArrayList<WSafeZoneScoreModel> wSafeZoneGroupBy() {
 
 		ArrayList<WSafeZoneScoreModel> arr = new ArrayList<WSafeZoneScoreModel>();
-		String sql = "SELECT guCode, COUNT(guCode) AS score FROM wsafezone GROUP BY name";
+		String sql = "SELECT guCode, COUNT(*) AS score FROM wsafezone GROUP BY guCode";
 		ResultSet rs = null;
 
 		try {

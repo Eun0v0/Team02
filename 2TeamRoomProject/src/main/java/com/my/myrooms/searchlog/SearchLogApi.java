@@ -13,5 +13,5 @@ public interface SearchLogApi {
 	void wSafeZoneGroupBy();
 	
 	//키워드 테이블에 있는 score를 기반으로 계산해서 json으로 넘김
-	ArrayList<guScoreModel> calScore(String id, String[] searchArr); 
+	String calScore(String id, String[] searchArr); 
 }

@@ -16,7 +16,7 @@ public class SortByValueApi {
 			public int compare(Object o1,Object o2) {
                 Object v1 = map.get(o1);
                 Object v2 = map.get(o2);
-                return ((Comparable<Object>) v1).compareTo(v2);
+                return ((Comparable<Object>) v2).compareTo(v1);
 			}
 		});
 		
