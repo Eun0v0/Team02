@@ -1,15 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
 <html>
 <head>
 <title>회원가입 처리</title>
 
 </head>
 <body>
+<form method="POST">
 	<div id="wrap">
 		<br> <br> <b><font size="5" color="gray">회원가입 정보를
-				확인하세요.</font></b> <br> <br> <font color="blue">${name}</font>님 가입을 축하드립니다. <br> <br>
-
+				확인하세요.</font></b> <br> <br> <font color="blue">${name}</font>님 가입을
+		축하드립니다. <br> <br>
 		<hr>
 		<table>
 			<tr>
@@ -42,5 +46,6 @@
 		<br> <input type="button" value="Go to Login"
 			onclick="location.href='loginForm'">
 	</div>
+	</form>
 </body>
 </html>

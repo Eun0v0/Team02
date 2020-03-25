@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +16,7 @@
 	content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
 <link rel="shortcut icon" href="img/favicon.png">
 
-<title>Login Page 2 | Creative - Bootstrap 3 Responsive Admin
+<title>Sign in Page 
 	Template</title>
 
 <!-- Bootstrap CSS -->
@@ -78,7 +81,8 @@
 
 	<div class="container">
 
-		<form class="login-form" name="joinForm" onSubmit="return check()" method="POST">
+		<form class="login-form" name="joinForm" onSubmit="return check()"
+			method="POST">
 			<div class="login-wrap">
 				<p class="login-img">
 					<i class="icon_lock_alt"></i>

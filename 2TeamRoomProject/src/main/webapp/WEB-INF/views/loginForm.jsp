@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,41 +37,27 @@
 
 <script>
 	//빈칸 여부 or 비밀번호 일치 테스트
-
-	
-	
 	function check() {
 		if (!document.loginForm.id.value) {
-			alert("id를 입력하세요.");
+			alert("Please insert ID.");
 			return false;
 		} else if (!document.loginForm.password.value) {
-			alert("password를 입력하세요.");
+			alert("Please insert Password.");
 			return false;
 		}
-		//		else {
-		//			$.getJSON("confirmID?id=" + $('[name="id"]').val() + "&pwd="
-		//					+ $('[name="password"]').val(), recvID);
-		//		}
 	}
 
-	function recvID(data) {
-		console.log("recvID")
-		if (data.length == 0) {
-			alert("OK.");//가능
-		} else {
-			alert("Your Id already in use. Please Insert another ID.");//불가능
-			return false;
-		}
-	}
+	<c:if test="${msg != ''}">
+		alert("${msg}");
+	</c:if>
+	
 </script>
 
 </head>
-
 <body class="login-img3-body">
-	
 	<div class="container">
-
-		<form class="login-form" name="loginForm" onSubmit="return check()" method="POST">
+		<form class="login-form" name="loginForm" onSubmit="return check()"
+			method="POST">
 			<div class="login-wrap">
 				<p class="login-img">
 					<i class="icon_lock_alt"></i>
@@ -82,9 +73,9 @@
 						placeholder="Password">
 				</div>
 
-				<input class="btn btn-primary btn-lg btn-block" type="submit" value="Login"
-					formaction="confirmID"> 
-					<input class="btn btn-info btn-lg btn-block" type="button" value="Sign Up"
+				<input class="btn btn-primary btn-lg btn-block" type="submit"
+					value="Login" formaction="confirmID"> <input
+					class="btn btn-info btn-lg btn-block" type="button" value="Sign Up"
 					onclick="location.href='joinForm'">
 			</div>
 		</form>

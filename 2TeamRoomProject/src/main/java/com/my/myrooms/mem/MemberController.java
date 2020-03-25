@@ -9,6 +9,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.my.myrooms.test.CusOptionDBHandle;
 import com.my.myrooms.test.CustomerDBHandle;
@@ -32,23 +34,22 @@ public class MemberController {
 
 	@Autowired
 	CustomerDBHandle customerDBHandle;
-
 	@Autowired
 	CusOptionDBHandle cusOptionDBHandle;
 
-	@RequestMapping(value = "/loginForm", method = RequestMethod.POST)
-	public String loginFormFn(HttpServletResponse response, Model model) {
+	@RequestMapping(value = "/loginForm")
+	public String loginFormFn(HttpServletRequest request, HttpServletResponse response, Model model) {
 		return "loginForm";
 	}
 
-	@RequestMapping(value = "/joinForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/joinForm")
 	public String joinFormFn(HttpServletResponse response, Model model) {
 		return "joinForm";
 	}
 
-	@RequestMapping(value = "/joinComplete", method = RequestMethod.POST)
-	public String joinCompleteFn(HttpServletRequest request, Model model) {
-		
+	@RequestMapping(value = "/joinComplete")
+	public String joinCompleteFn(HttpServletRequest request, Model model, final RedirectAttributes redirectAttributes) {
+		//model.addAttribute("msg", "");
 		try {
 			request.setCharacterEncoding("utf-8");
 			String id = request.getParameter("id");
@@ -79,56 +80,60 @@ public class MemberController {
 			model.addAttribute("job", job);
 
 			return "joinComplete";
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			
-			//return "error" + e.getMessage();
-			return "joinForm";
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "login Error :" + e.getMessage());
+			return "redirect:/joinForm";
 		}
-		
 	}
 
-	@RequestMapping(value = "/selectID", method = RequestMethod.GET)
+	@RequestMapping(value = "/selectID")
 	public void selectID(HttpServletRequest request, HttpServletResponse response, Model model) {
-		String sid = request.getParameter("id");
-		customerDBHandle.selectID(sid);
-
 		try {
+			String sid = request.getParameter("id");
+			customerDBHandle.selectID(sid);
+
 			PrintWriter out = response.getWriter();
 			String jsonStr = customerDBHandle.selectID(sid);
 
 			out.print(jsonStr);
 			out.flush();
 		} catch (IOException e) {
-// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	@RequestMapping(value = "/confirmID", method = RequestMethod.GET)
-	public String confirmID(HttpServletRequest request, HttpServletResponse response, Model model) {
-		String sid = request.getParameter("id");
-		String spwd = request.getParameter("password");
-
-		System.out.println(sid);
-		System.out.println(spwd);
-		
-
+	@RequestMapping(value = "/confirmID")
+	public String confirmID(HttpServletRequest request, HttpServletResponse response, Model model, final RedirectAttributes redirectAttributes) {
 		try {
+			request.setCharacterEncoding("utf-8");
+
+			String sid = request.getParameter("id");
+			String spwd = request.getParameter("password");
+
+			System.out.println(sid);
+			System.out.println(spwd);
 			PrintWriter out = response.getWriter();
 			String result = customerDBHandle.confirmID(sid, spwd);
 			
-			if (result == "OK") {
-				return "mainMap";
-			} else {
-				model.addAttribute("msg", "NOT CORRECT");
-				model.addAttribute("NO", result);
-				return "loginForm";
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "loginForm";
-		}
-	}
 
+			if (result == "OK") {
+
+				HttpSession session = request.getSession();
+				
+				session.setAttribute("id", sid);
+				
+				
+				redirectAttributes.addFlashAttribute("msg", "");
+				return "redirect:/mainMap";
+			} else {
+				redirectAttributes.addFlashAttribute("msg", "Not Correct ID or Password");
+				return "redirect:/loginForm";
+			}
+
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("msg", "login Error :" + e.getMessage());
+			return "redirect:/loginForm";
+		}
+
+	}
 }
