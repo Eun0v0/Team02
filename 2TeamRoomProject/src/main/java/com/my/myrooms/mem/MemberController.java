@@ -41,8 +41,18 @@ public class MemberController {
 	HttpSession session;
 	
 	@RequestMapping(value = "/loginForm")
-	public String loginFormFn(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String loginForm(HttpServletRequest request, HttpServletResponse response, Model model) {
 		return "loginForm";
+	}
+	
+	@RequestMapping(value = "/logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response, Model model) {
+		return "logout";
+	}
+	
+	@RequestMapping(value = "/NiceAdminLogin")
+	public String NiceAdminLogin(HttpServletRequest request, HttpServletResponse response, Model model) {
+		return "NiceAdminLogin";
 	}
 
 	@RequestMapping(value = "/joinForm")
@@ -120,7 +130,6 @@ public class MemberController {
 			
 
 			if (result == "OK") {
-				
 				session = request.getSession();
 				ArrayList<String> cusInfo = customerDBHandle.getCustomerInfo(sid);
 				

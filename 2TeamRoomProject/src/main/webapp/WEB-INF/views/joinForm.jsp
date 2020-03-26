@@ -138,7 +138,7 @@
 				<div class="input-group">
 					<span class="input-group-addon"><i class="icon_profile"></i></span>
 					<input type="number" class="form-control" name="age"
-						placeholder="birth(yymmdd)" autofocus>
+						placeholder="birth(yyyymmdd)" autofocus>
 				</div>
 
 				<div class="input-group">

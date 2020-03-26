@@ -8,10 +8,11 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<title>Insert title here</title>
+<title>LOGOUT</title>
+<% session.invalidate(); %>  
 <script>
-	alert('${msg}');
-	document.location.href = "${url}";
+	alert("logout");
+	document.location.href = "loginForm";
 </script>
 </head>
 
