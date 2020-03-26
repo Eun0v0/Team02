@@ -50,9 +50,9 @@ public class MemberController {
 		return "logout";
 	}
 	
-	@RequestMapping(value = "/NiceAdminLogin")
-	public String NiceAdminLogin(HttpServletRequest request, HttpServletResponse response, Model model) {
-		return "NiceAdminLogin";
+	@RequestMapping(value = "/profile")
+	public String profile(HttpServletRequest request, HttpServletResponse response, Model model) {
+		return "profile";
 	}
 
 	@RequestMapping(value = "/joinForm")
