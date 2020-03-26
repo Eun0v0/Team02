@@ -130,4 +130,26 @@ public class InsuranceController {
 		};
 		return "insurance/insuranceManage";
 	}
+	
+	@RequestMapping(value = "/selectUserInsurance", method = RequestMethod.GET)
+	public void selectUserInsurance(HttpServletResponse response, HttpServletRequest request, Model model) {
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=UTF-8");
+
+		int age = Integer.parseInt(request.getParameter("age"));
+		String sex = request.getParameter("sex");
+		
+		try {
+			PrintWriter out = response.getWriter();
+			String jsonStr = insurnaceDBHandle.selectUserIns(age, sex);
+			
+			if (jsonStr != null) {
+				out.print(jsonStr);
+				out.flush();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
+	}
 }

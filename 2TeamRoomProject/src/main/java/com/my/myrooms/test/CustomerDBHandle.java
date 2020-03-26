@@ -217,4 +217,50 @@ public class CustomerDBHandle {
 		}
 	}
 	
+	public ArrayList<String> getCustomerInfoAll(String sid) {
+		String sql = "select * from customer where id = ?";
+		ResultSet rs = null;
+
+		ArrayList<String> cus = new ArrayList<String>();
+		try {
+			conn = dataSource.getConnection();
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, sid);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String id = rs.getString("id");
+				String pwd = rs.getString("pwd");
+				String name = rs.getString("name");
+				String sex = rs.getString("sex");
+				int age = rs.getInt("age");
+				String gu = rs.getString("gu");
+				String dong = rs.getString("dong");
+				String job = rs.getString("job");
+				
+				cus.add(id);
+				cus.add(pwd);
+				cus.add(name);
+				cus.add(sex);
+				cus.add(String.valueOf(age));
+				cus.add(gu);
+				cus.add(dong);
+				cus.add(job);
+			}
+			rs.close();
+			return cus;
+
+		} catch (Exception ex) {
+			return cus;
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 }

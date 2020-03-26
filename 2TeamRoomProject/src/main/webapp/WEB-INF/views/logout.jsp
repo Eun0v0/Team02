@@ -17,5 +17,5 @@
 </head>
 
 <body>
-</body>
+</body>"C:/Users/user/Desktop/2조 프로젝트/채은/insuranceManage.jsp"
 </html>

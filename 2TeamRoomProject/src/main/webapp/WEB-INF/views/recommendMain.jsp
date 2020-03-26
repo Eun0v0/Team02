@@ -418,6 +418,12 @@
 							<button onclick="recommend()">Search</button>
 
 					</div>
+					<br><br>
+					<div class="row">
+						<table id="insAD">
+						
+						</table>
+					</div>
 				</div>
 				<!-- project team & activity end -->
 			</section>
@@ -523,17 +529,45 @@
     	  makeMap();
       })
       
+      $(function(){
+    	  var age = "${age}"
+          var sex = "${sex}"
+            	  
+          $.getJSON("selectUserInsurance?age="+age+"&sex="+sex, recvInsJson)  
+            
+      })
+      
+      //보험 상품 추천 부분
+      function recvInsJson(data){
+			console.log(data)
+			var imgArr = new Array();		
+			
+			$.each(data, (i, v) => {
+				imgArr.push(v.imgName);	
+			})
+			
+			var randomInt = Math.floor(Math.random()*imgArr.length);
+			if(randomInt == imgArr.length-1)
+				randomInt-=1;
+			$("#insAD").append("<tr><td><a href='https://www.idbins.com/mall/MallIntro.jsp'><img src='resources/NiceAdmin/img/insImg/"+imgArr[randomInt]+"' width='350px' height='200px'></a></td></tr>")
+			$("#insAD").append("<tr><td><a href='https://www.idbins.com/mall/MallIntro.jsp'><img src='resources/NiceAdmin/img/insImg/"+imgArr[randomInt+1]+"' width='350px' height='200px'></a></td></tr>")	
+		}
+      
+      //지도에 추천지역 뿌리기
       function recommend(){
     	  //var selectOption = new Array();
     	 
     	 var temp = "";
-    	 
+    	 var userID="${id}";
+    	
     	 $("input:checkbox[name=searchKey]:checked").each(function(){
-    		 //selectOption.push($(this).val())
     		 temp += "&searchKey="+$(this).val();
     	 });
-    	 $.getJSON("recommendResult?a=1" + temp , recvOptionJson)
-    	  customOverlay.setMap(null);
+    	 
+    	 //$.getJSON("recommendResult?id=1"+ temp , recvOptionJson)
+    	 
+    	 $.getJSON("insRecommendResult?id="+userID + temp , recvOptionJson)
+    	 customOverlay.setMap(null);
       }
       
       function recvOptionJson(data){
@@ -546,6 +580,7 @@
     	        	position.score = 0;
     	        else
     	        	position.score = v.score;
+    	        console.log(v.score);
     	        position.count = cnt++;
     	        positions.push(position)
     	    })

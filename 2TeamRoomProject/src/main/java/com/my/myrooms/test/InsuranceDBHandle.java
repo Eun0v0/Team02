@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.sql.DataSource;
 
@@ -137,6 +139,71 @@ public class InsuranceDBHandle {
 			
 		}catch(Exception ex) {
 			log.info("수정 실패: "+ex.getMessage());
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public String selectUserIns(int age, String sex){
+		JSONArray insuranceArr = new JSONArray();
+		String sql="select * from insurance where ages=? and sex=?";
+		ResultSet rs = null;
+		String ages=null;
+		
+		SimpleDateFormat f = new SimpleDateFormat("yyyy");
+		Date time = new Date();
+		
+		String time1 = f.format(time);
+		int tempAge = age/10000;
+		
+		int resultAge = Integer.parseInt(time1) - tempAge;
+		
+		System.out.println("나이나이:" +resultAge);
+		if(20<=resultAge && resultAge<30) {
+			ages="20대";
+		} else if (30<=resultAge && resultAge<40){
+			ages="30대";
+		} else {
+			ages="40대";
+		}
+		
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, ages);
+			pstmt.setString(2, sex);
+			
+			rs = pstmt.executeQuery();	
+			
+			while(rs.next()){
+				String insuranceIndex = rs.getString("insuranceIndex");
+				String insuranceName = rs.getString("insuranceName");
+				String category = rs.getString("category");
+				String insAges = rs.getString("ages");
+				String insSex = rs.getString("sex");
+				String imgName = rs.getString("imgName");
+				
+				JSONObject InsuranceObj = new JSONObject();
+			
+				InsuranceObj.put("insuranceIndex", insuranceIndex);
+				InsuranceObj.put("insuranceName", insuranceName);
+				InsuranceObj.put("category", category);
+				InsuranceObj.put("ages", insAges);
+				InsuranceObj.put("sex", insSex);
+				InsuranceObj.put("imgName", imgName);
+				
+				insuranceArr.add(InsuranceObj);
+			}
+			rs.close();
+			return insuranceArr.toJSONString();
+			
+		}catch(Exception ex) {
+			return "Error: " + ex.getStackTrace();
 		} finally {
 			try {
 				conn.close();

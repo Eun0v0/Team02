@@ -211,6 +211,7 @@ public class SearchLogApiImpl implements SearchLogApi {
 			double latitude = guInfoMap.get(guCode).getLatitude();
 			double longitude = guInfoMap.get(guCode).getLongitude();
 			
+			System.out.println("score-----------------------: "+ score);
 			GuScoreModel guScoreModel = new GuScoreModel(gu, guCode, score, latitude, longitude);
 			retList.add(guScoreModel);
 			
