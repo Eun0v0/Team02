@@ -408,9 +408,9 @@
 							</div>
 
 						</div>
-					</div><img src="\img\icons\search-line-icon.png">
+					</div>
 					<div class="col-md-3" id="favor">
-						<br> <br> <ol><label for="favors"><b>■  선택 옵션    ■</b></label></ol>
+						<br> <br> <ol><label for="favors"><img src="resources/NiceAdmin/img/icons/search-line-icon2.png" width="25px" height="25px"><b>  선택 옵션</b></label></ol>
 						<ol>
 							<input type="radio" name="favor" value="finedust"><b> 미세먼지</b>
 						</ol>
@@ -1114,7 +1114,7 @@
     	  var mapContainer = null;
           mapContainer = document.getElementById("map")    // 지도를 표시할 DIV
           mapOption = {
-              center: new kakao.maps.LatLng(37.5092956, 127.0554639)    // 지도의 중심좌표
+              center: new kakao.maps.LatLng(37.524856, 126.994017)    // 지도의 중심좌표
               , level: 8    // 지도의 확대레벨
           };
 		  // 지도를 생성
