@@ -131,12 +131,15 @@ public class MemberController {
 
 			if (result == "OK") {
 				session = request.getSession();
-				ArrayList<String> cusInfo = customerDBHandle.getCustomerInfo(sid);
+				ArrayList<String> cusInfo = customerDBHandle.getCustomerInfoAll(sid);
 				
 				session.setAttribute("id", cusInfo.get(0));
-				session.setAttribute("age", cusInfo.get(1));
-				session.setAttribute("sex", cusInfo.get(2));
-				session.setAttribute("job", cusInfo.get(3));
+				session.setAttribute("name", cusInfo.get(2));
+				session.setAttribute("sex", cusInfo.get(3));
+				session.setAttribute("age", cusInfo.get(4));
+				session.setAttribute("gu", cusInfo.get(5));
+				session.setAttribute("dong", cusInfo.get(6));
+				session.setAttribute("job", cusInfo.get(7));
 				
 				redirectAttributes.addFlashAttribute("msg", "");
 				return "redirect:/mainMap";
