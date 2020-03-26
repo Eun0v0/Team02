@@ -1997,8 +1997,8 @@ fieldset[disabled] .btn-danger.active {
 }
 .btn-success {
   color: #ffffff;
-  background-color: #4cd964;
-  border-color: #4cd964;
+  background-color: dimgray;
+  border-color: dimgray;
 }
 .btn-success:hover,
 .btn-success:focus,

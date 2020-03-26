@@ -207,10 +207,10 @@
 							<li><a href="#">See all notifications</a></li>
 						</ul></li>
 					<!-- alert notification end-->
-					
+
 					<li class="dropdown" id="btn"><a data-toggle="dropdown"
 						class="dropdown-toggle" href="#"> <span class="profile-ava">
-								<img alt="" src="resources/NiceAdmin/img/avatar1_small2.jpg" >
+								<img alt="" src="resources/NiceAdmin/img/avatar1_small2.jpg">
 						</span> <span class="username">Welcome, ${id}!</span> <b class="caret"></b>
 					</a>
 						<ul class="dropdown-menu extended logout">
@@ -219,8 +219,8 @@
 									class="icon_profile"></i> My Profile</a></li>
 							<li><a href="logout"><i class="icon_key_alt"></i> LogOut</a></li>
 						</ul></li>
-					
-						
+
+
 					<!-- user login dropdown end -->
 				</ul>
 				<!-- notificatoin dropdown end-->
@@ -236,6 +236,7 @@
 					<li><a class="" href="mainMap"> <i class="icon_genius"></i>
 							<span>Home</span>
 					</a></li>
+
 					<li class="sub-menu"><a href="recommendMain" class=""> <i
 							class="icon_document_alt"></i> <span>Recommend</span>
 					</a> <!-- 	
@@ -295,11 +296,11 @@
 								AGE
 								<h2 class="form-control">${age}</h2>
 								ADDRESS
-								<h2 class="form-control">${gu} / ${dong }</h2>
+								<h2 class="form-control">${gu}/${dong }</h2>
 								JOB
 								<h2 class="form-control">${job}</h2>
 							</div>
-							
+
 						</form>
 					</div>
 
@@ -320,8 +321,7 @@
 							<h4>Address:</h4>
 							Sansung St 96-23, Gangnam-gu, Seoul<br>
 							<h4>Telephone:</h4>
-							02-2136-6000
-							</br>
+							02-2136-6000 </br>
 							<h4>Fax:</h4>
 							02-2136-6007
 						</div>
@@ -332,8 +332,7 @@
 		</section>
 		<!--main content end-->
 		<div class="text-right">
-			<div class="credits">
-			</div>
+			<div class="credits"></div>
 		</div>
 	</section>
 	<!-- container section end -->

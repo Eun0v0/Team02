@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<% request.setCharacterEncoding("utf-8"); %>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,6 +66,7 @@
 	font-size: 18px;
 	color: #688a7e;
 }
+
 .customoverlay {
 	position: relative;
 	bottom: 85px;
@@ -72,10 +75,12 @@
 	border-bottom: 2px solid #ddd;
 	float: left;
 }
+
 .customoverlay:nth-of-type(n) {
 	border: 0;
 	box-shadow: 0px 1px 2px #888;
 }
+
 .customoverlay a {
 	display: block;
 	text-decoration: none;
@@ -88,6 +93,7 @@
 	background: #d95050;
 	background: #d95050 no-repeat right 14px center;
 }
+
 .customoverlay .title {
 	display: block;
 	text-align: center;
@@ -97,6 +103,7 @@
 	font-size: 14px;
 	font-weight: bold;
 }
+
 .customoverlay:after {
 	content: '';
 	position: absolute;
@@ -140,12 +147,12 @@ alert("로그인안함");
 				<!-- notificatoin dropdown start-->
 				<ul class="nav pull-right top-menu">
 
-					
+
 					<!-- user login dropdown start-->
-					
+
 					<li class="dropdown" id="btn"><a data-toggle="dropdown"
 						class="dropdown-toggle" href="#"> <span class="profile-ava">
-								<img alt="" src="resources/NiceAdmin/img/avatar1_small2.jpg" >
+								<img alt="" src="resources/NiceAdmin/img/avatar1_small2.jpg">
 						</span> <span class="username">Welcome, ${id}!</span> <b class="caret"></b>
 					</a>
 						<ul class="dropdown-menu extended logout">
@@ -154,8 +161,8 @@ alert("로그인안함");
 									class="icon_profile"></i> My Profile</a></li>
 							<li><a href="logout"><i class="icon_key_alt"></i> LogOut</a></li>
 						</ul></li>
-					
-						
+
+
 					<!-- user login dropdown end -->
 				</ul>
 				<!-- notificatoin dropdown end-->
@@ -169,33 +176,27 @@ alert("로그인안함");
 				<!-- sidebar menu start-->
 				<ul class="sidebar-menu">
 					<li><a class="" href="mainMap"> <i class="icon_genius"></i>
-							<span>Home</span>
+							<span><b>Home</b></span>
 					</a></li>
 					<li class="sub-menu"><a href="recommendMain" class=""> <i
-							class="icon_document_alt"></i> <span>Recommend</span>
+							class="icon_document_alt"></i> <span><b>Recommend</b></span>
 					</a>
-<!-- 	
-					<li class="sub-menu"><a href="javascript:;" class=""> <i
-							class="icon_desktop"></i> <span>UI Fitures</span> <span
-							class="menu-arrow arrow_carrot-right"></span>
-					</a>
-						<ul class="sub">
-							<li><a class="" href="general.html">Elements</a></li>
-							<li><a class="" href="buttons.html">Buttons</a></li>
-							<li><a class="" href="grids.html">Grids</a></li>
-						</ul></li>
- -->
 					<li><a class="" href="chart-chartjs.html"> <i
-							class="icon_piechart"></i> <span>Charts</span>
+							class="icon_piechart"></i> <span><b>Charts</b></span>
 					</a></li>
 
+
 					<li class="sub-menu"><a href="javascript:;" class=""> <i
-							class="icon_table"></i> <span>Manager Tab</span> <span
+							class="icon_table"></i> <span><b>Manager Tab </b></span> <span
 							class="menu-arrow arrow_carrot-right"></span>
 					</a>
+
 						<ul class="sub">
-							<li><a class="" href="insuranceManage">Insurance Table</a></li>
+							<li><a class="" href="insuranceManage"><b>Insurance
+										Table</b></a></li>
 						</ul></li>
+
+
 
 				</ul>
 				<!-- sidebar menu end-->
@@ -209,7 +210,7 @@ alert("로그인안함");
 				<!--overview start-->
 				<div class="row" style="height: 10px">
 					<div class="col-lg-12">
-						
+
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a href="mainMap">Home</a></li>
 							<li><i class="fa fa-laptop"></i>Dashboard</li>
@@ -217,15 +218,13 @@ alert("로그인안함");
 					</div>
 				</div>
 
-
-
 				<div class="row">
 					<div class="col-lg-9 col-md-12">
 
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h2>
-									<i class="fa fa-map-marker red"></i> <strong>항목별 지도보기
+									<i class="fa fa-map-marker red"></i> <strong> 항목별 지도보기
 										( 상위 30%: 좋음 / 하위 30%: 나쁨 )</strong>
 								</h2>
 								<div class="panel-actions">
@@ -274,66 +273,72 @@ alert("로그인안함");
 						</ol>
 
 					</div>
+					<br><br>
+					<div class="row">
+						<table id="insAD">
+						
+						</table>
+					</div>
 
-				
-			</div>
+				</div>
+			</section>
+			<!--main content end-->
 		</section>
-		<!--main content end-->
-	</section>
-	<!-- container section start -->
+		<!-- container section start -->
 
-	<!-- javascripts -->
-	<script src="resources/NiceAdmin/js/jquery.js"></script>
-	<script src="resources/NiceAdmin/js/jquery-ui-1.10.4.min.js"></script>
-	<script src="resources/NiceAdmin/js/jquery-1.8.3.min.js"></script>
-	<script type="text/javascript"
-		src="resources/NiceAdmin/js/jquery-ui-1.9.2.custom.min.js"></script>
-	<!-- bootstrap -->
-	<script src="resources/NiceAdmin/js/bootstrap.min.js"></script>
-	<!-- nice scroll -->
-	<script src="resources/NiceAdmin/js/jquery.scrollTo.min.js"></script>
-	<script src="resources/NiceAdmin/js/jquery.nicescroll.js"
-		type="text/javascript"></script>
-	<!-- charts scripts -->
-	<script src="resources/NiceAdmin/assets/jquery-knob/js/jquery.knob.js"></script>
-	<script src="resources/NiceAdmin/js/jquery.sparkline.js"
-		type="text/javascript"></script>
-	<script
-		src="resources/NiceAdmin/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
-	<script src="resources/NiceAdmin/js/owl.carousel.js"></script>
-	<!-- jQuery full calendar -->
-	
-	<script src="resources/NiceAdmin/js/fullcalendar.min.js"></script>
-	<!-- Full Google Calendar - Calendar -->
-	<script
-		src="resources/NiceAdmin/assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
-	<!--script for this page only-->
-	<script src="resources/NiceAdmin/js/calendar-custom.js"></script>
-	<script src="resources/NiceAdmin/js/jquery.rateit.min.js"></script>
-	<!-- custom select -->
-	<script src="resources/NiceAdmin/js/jquery.customSelect.min.js"></script>
-	<script src="resources/NiceAdmin/assets/chart-master/Chart.js"></script>
+		<!-- javascripts -->
+		<script src="resources/NiceAdmin/js/jquery.js"></script>
+		<script src="resources/NiceAdmin/js/jquery-ui-1.10.4.min.js"></script>
+		<script src="resources/NiceAdmin/js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript"
+			src="resources/NiceAdmin/js/jquery-ui-1.9.2.custom.min.js"></script>
+		<!-- bootstrap -->
+		<script src="resources/NiceAdmin/js/bootstrap.min.js"></script>
+		<!-- nice scroll -->
+		<script src="resources/NiceAdmin/js/jquery.scrollTo.min.js"></script>
+		<script src="resources/NiceAdmin/js/jquery.nicescroll.js"
+			type="text/javascript"></script>
+		<!-- charts scripts -->
+		<script src="resources/NiceAdmin/assets/jquery-knob/js/jquery.knob.js"></script>
+		<script src="resources/NiceAdmin/js/jquery.sparkline.js"
+			type="text/javascript"></script>
+		<script
+			src="resources/NiceAdmin/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
+		<script src="resources/NiceAdmin/js/owl.carousel.js"></script>
+		<!-- jQuery full calendar -->
 
-	<!--custome script for all page-->
-	<script src="resources/NiceAdmin/js/scripts.js"></script>
-	<!-- custom script for this page-->
-	<script src="resources/NiceAdmin/js/sparkline-chart.js"></script>
-	<script src="resources/NiceAdmin/js/easy-pie-chart.js"></script>
-	<script src="resources/NiceAdmin/js/jquery-jvectormap-1.2.2.min.js"></script>
-	<script src="resources/NiceAdmin/js/jquery-jvectormap-world-mill-en.js"></script>
-	<script src="resources/NiceAdmin/js/xcharts.min.js"></script>
-	<script src="resources/NiceAdmin/js/jquery.autosize.min.js"></script>
-	<script src="resources/NiceAdmin/js/jquery.placeholder.min.js"></script>
-	<script src="resources/NiceAdmin/js/gdp-data.js"></script>
-	<script src="resources/NiceAdmin/js/morris.min.js"></script>
-	<script src="resources/NiceAdmin/js/sparklines.js"></script>
-	<script src="resources/NiceAdmin/js/charts.js"></script>
-	<script src="resources/NiceAdmin/js/jquery.slimscroll.min.js"></script>
+		<script src="resources/NiceAdmin/js/fullcalendar.min.js"></script>
+		<!-- Full Google Calendar - Calendar -->
+		<script
+			src="resources/NiceAdmin/assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
+		<!--script for this page only-->
+		<script src="resources/NiceAdmin/js/calendar-custom.js"></script>
+		<script src="resources/NiceAdmin/js/jquery.rateit.min.js"></script>
+		<!-- custom select -->
+		<script src="resources/NiceAdmin/js/jquery.customSelect.min.js"></script>
+		<script src="resources/NiceAdmin/assets/chart-master/Chart.js"></script>
 
-	<script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5bcdac877b8e9d5df65dcdcba3c9c1e4"></script>
+		<!--custome script for all page-->
+		<script src="resources/NiceAdmin/js/scripts.js"></script>
+		<!-- custom script for this page-->
+		<script src="resources/NiceAdmin/js/sparkline-chart.js"></script>
+		<script src="resources/NiceAdmin/js/easy-pie-chart.js"></script>
+		<script src="resources/NiceAdmin/js/jquery-jvectormap-1.2.2.min.js"></script>
+		<script
+			src="resources/NiceAdmin/js/jquery-jvectormap-world-mill-en.js"></script>
+		<script src="resources/NiceAdmin/js/xcharts.min.js"></script>
+		<script src="resources/NiceAdmin/js/jquery.autosize.min.js"></script>
+		<script src="resources/NiceAdmin/js/jquery.placeholder.min.js"></script>
+		<script src="resources/NiceAdmin/js/gdp-data.js"></script>
+		<script src="resources/NiceAdmin/js/morris.min.js"></script>
+		<script src="resources/NiceAdmin/js/sparklines.js"></script>
+		<script src="resources/NiceAdmin/js/charts.js"></script>
+		<script src="resources/NiceAdmin/js/jquery.slimscroll.min.js"></script>
 
-	<script>
+		<script type="text/javascript"
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5bcdac877b8e9d5df65dcdcba3c9c1e4"></script>
+
+		<script>
       //knob
       $(function() {
         $(".knob").knob({
@@ -363,6 +368,30 @@ alert("로그인안함");
     	  makeMap();
     	  //$.getJSON("showWSafeZone", recvJson)
       })
+      
+      $(function(){
+    	  var age = "${age}"
+          var sex = "${sex}"
+            	  
+          $.getJSON("selectUserInsurance?age="+age+"&sex="+sex, recvInsJson)  
+            
+      })
+      
+      //보험 상품 추천 부분
+      function recvInsJson(data){
+			console.log(data)
+			var imgArr = new Array();		
+			
+			$.each(data, (i, v) => {
+				imgArr.push(v.imgName);	
+			})
+			
+			var randomInt = Math.floor(Math.random()*imgArr.length);
+			if(randomInt == imgArr.length-1)
+				randomInt-=1;
+			$("#insAD").append("<tr><td><a href='https://www.idbins.com/mall/MallIntro.jsp'><img src='resources/NiceAdmin/img/insImg/"+imgArr[randomInt]+"' width='350px' height='200px'></a></td></tr>")
+			$("#insAD").append("<tr><td><a href='https://www.idbins.com/mall/MallIntro.jsp'><img src='resources/NiceAdmin/img/insImg/"+imgArr[randomInt+1]+"' width='350px' height='200px'></a></td></tr>")	
+		}
       
       $(function(){
     	$("input:radio[name=favor]").click(function(){
