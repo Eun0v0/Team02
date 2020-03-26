@@ -410,7 +410,7 @@
 						</div>
 					</div>
 					<div class="col-md-3" id="favor">
-						<br> <br> <ol><label for="favors"><img src="resources/NiceAdmin/img/icons/search-line-icon2.png" width="25px" height="25px"><b>  선택 옵션</b></label></ol>
+						<br> <br> <ol><label for="favors"><img src="resources/NiceAdmin/img/icons/search-line-icon2.png" width="25px" height="25px"><b>관심 항목 선택</b></label></ol>
 						<ol>
 							<input type="radio" name="favor" value="finedust"><b> 미세먼지</b>
 						</ol>
