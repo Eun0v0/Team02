@@ -279,7 +279,7 @@ textarea {
   background-image: none;
 }
 a {
-  color: #007aff;
+  color: #00854A;
   text-decoration: none;
 }
 a:hover,
@@ -4707,9 +4707,9 @@ a.list-group-item:focus {
   border-color: #dddddd;
 }
 .panel-default > .panel-heading {
-  color: #2b2b2b;
-  background-color: #f5f5f5;
-  border-color: #dddddd;
+  color: #ffffff;
+  background-color: #00854A;
+  border-color: #00854A;
 }
 .panel-default > .panel-heading + .panel-collapse .panel-body {
   border-top-color: #dddddd;

@@ -14,9 +14,9 @@
 
 body {
 
-    color: #797979;
+    color: #00854A;
 
-    background: #eeeeee;
+    background: #fbfbfb;
 
     font-family: 'Lato', sans-serif;
 
@@ -516,7 +516,7 @@ table tr th { color: #688a7e;}
 
     position: fixed;
 
-    background: #394a59;
+    background: floralwhite;
 
 }
 
@@ -676,7 +676,7 @@ ul.sidebar-menu li a span{
 
 ul.sidebar-menu li a{
 
-    color: #d0d8df;
+    color: #394a59;
 
     text-decoration: none;
 
@@ -716,9 +716,9 @@ ul.sidebar-menu li a{
 
 ul.sidebar-menu li.active a, ul.sidebar-menu li a:hover, ul.sidebar-menu li a:focus {
 
-    background: #2e3b46;
+    background: whitesmoke;
 
-    color: #fff;
+    color: #2e3b46;
 
     display: block;
 
