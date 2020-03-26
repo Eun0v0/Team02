@@ -318,11 +318,12 @@
 								iis qui facit eorum.</p>
 
 							<h4>Address:</h4>
-							Teheran St, Seoul<br>
+							Sansung St 96-23, Gangnam-gu, Seoul<br>
 							<h4>Telephone:</h4>
+							02-2136-6000
 							</br>
 							<h4>Fax:</h4>
-							123 456 789
+							02-2136-6007
 						</div>
 					</div>
 				</div>
@@ -332,13 +333,6 @@
 		<!--main content end-->
 		<div class="text-right">
 			<div class="credits">
-				<!--
-            All the links in the footer should remain intact.
-            You can delete the links only if you purchased the pro version.
-            Licensing information: https://bootstrapmade.com/license/
-            Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
-          -->
-				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
 			</div>
 		</div>
 	</section>

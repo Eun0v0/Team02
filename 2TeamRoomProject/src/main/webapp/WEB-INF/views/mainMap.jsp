@@ -64,7 +64,6 @@
 	font-size: 18px;
 	color: #688a7e;
 }
-
 .customoverlay {
 	position: relative;
 	bottom: 85px;
@@ -73,12 +72,10 @@
 	border-bottom: 2px solid #ddd;
 	float: left;
 }
-
 .customoverlay:nth-of-type(n) {
 	border: 0;
 	box-shadow: 0px 1px 2px #888;
 }
-
 .customoverlay a {
 	display: block;
 	text-decoration: none;
@@ -91,7 +88,6 @@
 	background: #d95050;
 	background: #d95050 no-repeat right 14px center;
 }
-
 .customoverlay .title {
 	display: block;
 	text-align: center;
@@ -101,7 +97,6 @@
 	font-size: 14px;
 	font-weight: bold;
 }
-
 .customoverlay:after {
 	content: '';
 	position: absolute;
@@ -118,7 +113,6 @@
 <script>
 <c:if test="${empty id}">
 alert("로그인안함");
-
 </c:if>
 </script>
 
@@ -127,6 +121,7 @@ alert("로그인안함");
 <body>
 	<!-- container section start -->
 	<section id="container" class="">
+
 
 		<header class="header green2-bg">
 			<div class="toggle-nav">
@@ -145,152 +140,7 @@ alert("로그인안함");
 				<!-- notificatoin dropdown start-->
 				<ul class="nav pull-right top-menu">
 
-					<!-- task notificatoin start -->
-					<li id="task_notificatoin_bar" class="dropdown"><a
-						data-toggle="dropdown" class="dropdown-toggle" href="#"> <i
-							class="icon-task-l"></i> <span class="badge bg-important">6</span>
-					</a>
-						<ul class="dropdown-menu extended tasks-bar">
-							<div class="notify-arrow notify-arrow-blue"></div>
-							<li>
-								<p class="blue">You have 6 pending letter</p>
-							</li>
-							<li><a href="#">
-									<div class="task-info">
-										<div class="desc">Design PSD</div>
-										<div class="percent">90%</div>
-									</div>
-									<div class="progress progress-striped">
-										<div class="progress-bar progress-bar-success"
-											role="progressbar" aria-valuenow="90" aria-valuemin="0"
-											aria-valuemax="100" style="width: 90%">
-											<span class="sr-only">90% Complete (success)</span>
-										</div>
-									</div>
-							</a></li>
-							<li><a href="#">
-									<div class="task-info">
-										<div class="desc">Project 1</div>
-										<div class="percent">30%</div>
-									</div>
-									<div class="progress progress-striped">
-										<div class="progress-bar progress-bar-warning"
-											role="progressbar" aria-valuenow="30" aria-valuemin="0"
-											aria-valuemax="100" style="width: 30%">
-											<span class="sr-only">30% Complete (warning)</span>
-										</div>
-									</div>
-							</a></li>
-							<li><a href="#">
-									<div class="task-info">
-										<div class="desc">Digital Marketing</div>
-										<div class="percent">80%</div>
-									</div>
-									<div class="progress progress-striped">
-										<div class="progress-bar progress-bar-info" role="progressbar"
-											aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-											style="width: 80%">
-											<span class="sr-only">80% Complete</span>
-										</div>
-									</div>
-							</a></li>
-							<li><a href="#">
-									<div class="task-info">
-										<div class="desc">Logo Designing</div>
-										<div class="percent">78%</div>
-									</div>
-									<div class="progress progress-striped">
-										<div class="progress-bar progress-bar-danger"
-											role="progressbar" aria-valuenow="78" aria-valuemin="0"
-											aria-valuemax="100" style="width: 78%">
-											<span class="sr-only">78% Complete (danger)</span>
-										</div>
-									</div>
-							</a></li>
-							<li><a href="#">
-									<div class="task-info">
-										<div class="desc">Mobile App</div>
-										<div class="percent">50%</div>
-									</div>
-									<div class="progress progress-striped active">
-										<div class="progress-bar" role="progressbar"
-											aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
-											style="width: 50%">
-											<span class="sr-only">50% Complete</span>
-										</div>
-									</div>
-
-							</a></li>
-							<li class="external"><a href="#">See All Tasks</a></li>
-						</ul></li>
-					<!-- task notificatoin end -->
-					<!-- inbox notificatoin start-->
-					<li id="mail_notificatoin_bar" class="dropdown"><a
-						data-toggle="dropdown" class="dropdown-toggle" href="#"> <i
-							class="icon-envelope-l"></i> <span class="badge bg-important">5</span>
-					</a>
-						<ul class="dropdown-menu extended inbox">
-							<div class="notify-arrow notify-arrow-blue"></div>
-							<li>
-								<p class="blue">You have 5 new messages</p>
-							</li>
-							<li><a href="#"> <span class="photo"><img
-										alt="avatar" src="resources/NiceAdmin/img/avatar-mini.jpg"></span>
-									<span class="subject"> <span class="from">Greg
-											Martin</span> <span class="time">1 min</span>
-								</span> <span class="message"> I really like this admin panel. </span>
-							</a></li>
-							<li><a href="#"> <span class="photo"><img
-										alt="avatar" src="./resources/NiceAdmin/img/avatar-mini2.jpg"></span>
-									<span class="subject"> <span class="from">Bob
-											Mckenzie</span> <span class="time">5 mins</span>
-								</span> <span class="message"> Hi, What is next project plan? </span>
-							</a></li>
-							<li><a href="#"> <span class="photo"><img
-										alt="avatar" src="./resources/NiceAdmin/img/avatar-mini3.jpg"></span>
-									<span class="subject"> <span class="from">Phillip
-											Park</span> <span class="time">2 hrs</span>
-								</span> <span class="message"> I am like to buy this Admin
-										Template. </span>
-							</a></li>
-							<li><a href="#"> <span class="photo"><img
-										alt="avatar" src="./resources/NiceAdmin/img/avatar-mini4.jpg"></span>
-									<span class="subject"> <span class="from">Ray
-											Munoz</span> <span class="time">1 day</span>
-								</span> <span class="message"> Icon fonts are great. </span>
-							</a></li>
-							<li><a href="#">See all messages</a></li>
-						</ul></li>
-					<!-- inbox notificatoin end -->
-					<!-- alert notification start-->
-					<li id="alert_notificatoin_bar" class="dropdown"><a
-						data-toggle="dropdown" class="dropdown-toggle" href="#"> <i
-							class="icon-bell-l"></i> <span class="badge bg-important">7</span>
-					</a>
-						<ul class="dropdown-menu extended notification">
-							<div class="notify-arrow notify-arrow-blue"></div>
-							<li>
-								<p class="blue">You have 4 new notifications</p>
-							</li>
-							<li><a href="#"> <span class="label label-primary"><i
-										class="icon_profile"></i></span> Friend Request <span
-									class="small italic pull-right">5 mins</span>
-							</a></li>
-							<li><a href="#"> <span class="label label-warning"><i
-										class="icon_pin"></i></span> John location. <span
-									class="small italic pull-right">50 mins</span>
-							</a></li>
-							<li><a href="#"> <span class="label label-danger"><i
-										class="icon_book_alt"></i></span> Project 3 Completed. <span
-									class="small italic pull-right">1 hr</span>
-							</a></li>
-							<li><a href="#"> <span class="label label-success"><i
-										class="icon_like"></i></span> Mick appreciated your work. <span
-									class="small italic pull-right"> Today</span>
-							</a></li>
-							<li><a href="#">See all notifications</a></li>
-						</ul></li>
-					<!-- alert notification end-->
+					
 					<!-- user login dropdown start-->
 					
 					<li class="dropdown" id="btn"><a data-toggle="dropdown"
@@ -300,7 +150,7 @@ alert("로그인안함");
 					</a>
 						<ul class="dropdown-menu extended logout">
 							<div class="log-arrow-up"></div>
-							<li class="eborder-top"><a href="#"><i
+							<li class="eborder-top"><a href="profile"><i
 									class="icon_profile"></i> My Profile</a></li>
 							<li><a href="logout"><i class="icon_key_alt"></i> LogOut</a></li>
 						</ul></li>
@@ -357,11 +207,9 @@ alert("로그인안함");
 		<section id="main-content">
 			<section class="wrapper">
 				<!--overview start-->
-				<div class="row" style="height: 100px">
+				<div class="row" style="height: 10px">
 					<div class="col-lg-12">
-						<h2 class="page-header">
-							<i class="fa fa-laptop"></i>Main
-						</h2>
+						
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a href="mainMap">Home</a></li>
 							<li><i class="fa fa-laptop"></i>Dashboard</li>
@@ -388,7 +236,7 @@ alert("로그인안함");
 								</div>
 							</div>
 							<div class="panel-body-map">
-								<div id="map" style="width: 100%; height: 450px;"></div>
+								<div id="map" style="width: 100%; height: 650px;"></div>
 							</div>
 
 						</div>
@@ -494,7 +342,6 @@ alert("로그인안함");
           }
         })
       });
-
       //carousel
       $(document).ready(function() {
         $("#owl-slider").owlCarousel({
@@ -502,14 +349,11 @@ alert("로그인안함");
           slideSpeed: 300,
           paginationSpeed: 400,
           singleItem: true
-
         });
       });
-
       $(function() {
         $('select.styled').customSelect();
       });
-
       positions = [];//전체 정보
       selectOption = ""; //선택된 옵션 정보
 	  map;
@@ -621,7 +465,6 @@ alert("로그인안함");
 		      		 circle.setOptions({fillColor: '#FFB9B9'});
 	    	   
 	       }); 
-
 	       // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다 
 	       kakao.maps.event.addListener(circle, 'click', function(mouseEvent) {
 	           
@@ -659,7 +502,5 @@ alert("로그인안함");
 			
       }
     </script>
-
 </body>
-
 </html>

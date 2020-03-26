@@ -370,7 +370,7 @@
 		<section id="main-content">
 			<section class="wrapper">
 				<!--overview start-->
-				<div class="row" style="height: 80px">
+				<div class="row" style="height: 10px">
 					<div class="col-lg-12">
 						<h2 class="page-header">
 						</h2>
