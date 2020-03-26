@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.my.myrooms.join.CustomerModel;
+import com.my.myrooms.stat.StatLogModel;
 
 @Repository
 public class SearchLogDBHandle {
@@ -96,6 +97,40 @@ public class SearchLogDBHandle {
 
 		} catch (Exception e) {
 			System.out.println("검색Log Insert 실패");
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+public ArrayList<StatLogModel> selectAllLog() {
+		
+		String sql = "select id, age, sex, job, searchoption from searchlog";
+		ArrayList<StatLogModel> searchLogList = new ArrayList<StatLogModel>();
+		ResultSet rs = null;
+
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int age = (rs.getInt("age") / 10) * 10;
+				String sex = rs.getString("sex");
+				String job = rs.getString("job");
+				String selectOption = rs.getString("searchoption");
+				
+				searchLogList.add(new StatLogModel(age, sex, job, selectOption));
+			}
+			rs.close();
+			return searchLogList;
+
+		} catch (Exception ex) {
+			return null;
 		} finally {
 			try {
 				conn.close();

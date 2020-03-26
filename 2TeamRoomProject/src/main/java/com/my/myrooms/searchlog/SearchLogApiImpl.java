@@ -202,7 +202,7 @@ public class SearchLogApiImpl implements SearchLogApi {
 			getGuScore(option);
 		}
 		
-		Iterator<Integer> iter = sortByValueApi.sortByValue(guScoreMap).iterator();
+		Iterator<Integer> iter = sortByValueApi.sortIntByValue(guScoreMap).iterator();
 		
 		while (iter.hasNext()) {
 			int guCode = iter.next();
