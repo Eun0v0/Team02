@@ -13,7 +13,7 @@
 	content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
 <link rel="shortcut icon" href="resources/NiceAdmin/img/favicon.png">
 
-<title>Creative - Bootstrap Admin Template</title>
+<title>Recommend</title>
 
 <!-- Bootstrap CSS -->
 <link href="resources/NiceAdmin/css/bootstrap.min.css" rel="stylesheet">

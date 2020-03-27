@@ -116,7 +116,7 @@
 				</a></li>
 				<li class="sub-menu"><a href="recommendMain" class=""> <i
 						class="icon_document_alt"></i> <span><b>Recommend</b></span>
-				</a> <li><a class="" href="chart-chartjs.html"> <i
+				</a> <li><a class="" href="statMain"> <i
 						class="icon_piechart"></i> <span><b>Charts</b></span>
 				</a></li><%
 					String memberId = (String) session.getAttribute("id");
@@ -145,7 +145,6 @@
 		<section class="wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					
 
 				</div>
 			</div>

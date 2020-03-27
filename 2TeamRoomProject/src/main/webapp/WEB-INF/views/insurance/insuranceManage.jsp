@@ -13,8 +13,7 @@
 	content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
 <link rel="shortcut icon" href="img/favicon.png">
 
-<title>Basic Table | Creative - Bootstrap 3 Responsive Admin
-	Template</title>
+<title>Manger Tab</title>
 
 <!-- Bootstrap CSS -->
 <link href="resources/NiceAdmin/css/bootstrap.min.css?2"
@@ -110,7 +109,7 @@
 					</a></li>
 					<li class="sub-menu"><a href="recommendMain" class=""> <i
 							class="icon_document_alt"></i> <span><b>Recommend</b></span>
-					</a> <li><a class="" href="chart-chartjs.html"> <i
+					</a> <li><a class="" href="statMain"> <i
 							class="icon_piechart"></i> <span><b>Charts</b></span>
 					</a></li>
 
@@ -354,7 +353,7 @@
 				buttonVar += "<i class='icon_check_alt2' id ='modifyIns'></i></a>";
 				
 				
-				buttonVar += "<a class='btn btn-danger' id='deleteIns' data-iname='"+v.insuranceName+"'><i class='icon_close_alt2'></i></a></div></td>";
+				buttonVar += "<a class='btn btn-danger deleteIns' id='deleteIns' data-iname='"+v.insuranceName+"'><i class='icon_close_alt2'></i></a></div></td>";
 
 				$("#insTab > tbody").append("<tr><td>" + v.insuranceIndex + "</td><td>" 
 					+ v.insuranceName + "</td><td>" + v.category + 
@@ -364,23 +363,24 @@
 		}
 		
 
-		$(document).on('click','#deleteIns',function() {
+		$(document).on('click','.deleteIns',function() {
 			console.log("삭제")
 			
-			deleteIndex = $('#deleteIns').index($(this));
-			
-			$.get("deleteInsurance?name="+ $(this).attr("data-iname"), function(data){
-				$('tbody>tr:eq('+deleteIndex+')').remove();
-			}); 
+			deleteIndex = $('button.deleteIns').index($(this));
+			console.log(deleteIndex)
+ 			$.get("deleteInsurance?name="+ $(this).attr("data-iname"), function(data){
+				$('tbody tr:eq('+deleteIndex+')').remove();
+				//$('#deleteIns').parent().remove();
+			});  
 		})
 		
-		$(document).on('click','insertIns',function() {
+		/* $(document).on('click','insertIns',function() {
 			modifyIndex = $('tbody>tr>td>#modifyIns').index($(this));
 			
 			$('tbody>tr:eq('+modifyIndex+')').html("<td></td><td> 수정수정</td><td>수정수정</td><td>수정!</td><td>악</td><td>ㅠ</td><td> <button id = 'modifyIns'> 수정 </button></td><td><button id='deleteIns'> 삭제 </button> </td>");
 		
 		})
-		
+		 */
 		
 		$('#exampleModal').on('show.bs.modal', function (event) {
 			  var button = $(event.relatedTarget) // Button that triggered the modal

@@ -62,7 +62,6 @@ public class MemberController {
 
 	@RequestMapping(value = "/joinComplete")
 	public String joinCompleteFn(HttpServletRequest request, Model model, final RedirectAttributes redirectAttributes) {
-		//model.addAttribute("msg", "");
 		try {
 			request.setCharacterEncoding("utf-8");
 			String id = request.getParameter("id");

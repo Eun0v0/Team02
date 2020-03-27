@@ -29,17 +29,12 @@ public class StatApiImpl implements StatApi {
 	
 	@Override
 	public void getSearchLog() {
-		
-		statLogList = new ArrayList<StatLogModel>(); 
 		statLogList = searchLogDBHandle.selectAllLog();
 	}
 
 	@Override
 	public String statByOption(String key) {
-		
-		if(statLogList == null) {
 			getSearchLog();
-		}
 		
 		Map<String, String> topOptionMap = new HashMap<String, String>();
 		Map<String, Map<String, Integer>> statMap = new HashMap<String, Map<String, Integer>>();
