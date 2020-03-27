@@ -113,7 +113,6 @@
 }
 </style>
 
-
 </head>
 
 <body>
@@ -136,12 +135,12 @@
 				<!-- notificatoin dropdown start-->
 				<ul class="nav pull-right top-menu">
 
-					
+
 					<!-- user login dropdown start-->
-					
+
 					<li class="dropdown" id="btn"><a data-toggle="dropdown"
 						class="dropdown-toggle" href="#"> <span class="profile-ava">
-								<img alt="" src="resources/NiceAdmin/img/avatar1_small2.jpg" >
+								<img alt="" src="resources/NiceAdmin/img/avatar1_small2.jpg">
 						</span> <span class="username">Welcome, ${id}!</span> <b class="caret"></b>
 					</a>
 						<ul class="dropdown-menu extended logout">
@@ -150,8 +149,8 @@
 									class="icon_profile"></i> My Profile</a></li>
 							<li><a href="logout"><i class="icon_key_alt"></i> LogOut</a></li>
 						</ul></li>
-					
-						
+
+
 					<!-- user login dropdown end -->
 				</ul>
 				<!-- notificatoin dropdown end-->
@@ -170,21 +169,28 @@
 					<li class="sub-menu"><a href="recommendMain" class=""> <i
 							class="icon_document_alt"></i> <span><b>Recommend</b></span>
 					</a>
-
 					<li><a class="" href="chart-chartjs.html"> <i
 							class="icon_piechart"></i> <span><b>Charts</b></span>
 					</a></li>
 
-					<%if("${id}".equals("manager")){ %>
-						<li class="sub-menu"><a href="javascript:;" class=""> <i
-							class="icon_table"></i> <span><b>Manager Tab </b></span> 
-							<span class="menu-arrow arrow_carrot-right"></span>
-						</a>
-					
+					<%
+						String memberId = null;
+						memberId = (String) session.getAttribute("id");
+
+						if (memberId.equals("manager")) {
+					%>
+					<li class="sub-menu"><a href="javascript:;" class=""> <i
+							class="icon_table"></i> <span><b>Manager Tab </b></span> <span
+							class="menu-arrow arrow_carrot-right"></span>
+					</a>
+
 						<ul class="sub">
-							<li><a class="" href="insuranceManage"><b>Insurance Table</b></a></li>
+							<li><a class="" href="insuranceManage"><b>Insurance
+										Table</b></a></li>
 						</ul></li>
-					<% } %>
+					<%
+						}
+					%>
 				</ul>
 				<!-- sidebar menu end-->
 			</div>
@@ -198,9 +204,9 @@
 				<div class="row" style="height: 10px">
 					<div class="col-lg-12">
 						<b>
-						<ol class="breadcrumb">
-							<li><i class="fa fa-laptop"></i><a href="recommendMain">Recommend</a></li>
-						</ol>
+							<ol class="breadcrumb">
+								<li><i class="fa fa-laptop"></i><a href="recommendMain">Recommend</a></li>
+							</ol>
 						</b>
 					</div>
 				</div>
@@ -228,16 +234,16 @@
 						</div>
 					</div>
 					<div class="col-md-3" id="favor">
-						<br>
-						<br>
+						<br> <br>
 						<ol>
 							<label for="favors"><img
 								src="resources/NiceAdmin/img/icons/search-line-icon2.png"
 								width="25px" height="25px"><b>관심사</b></label>
 						</ol>
-						
+
 						<ol>
-							<input type="checkbox" name="searchKey" value="noise"><b>소음공해
+							<input type="checkbox" name="searchKey" value="noise">
+							<b>소음공해 
 						</ol>
 						<ol>
 							<input type="checkbox" name="searchKey" value="finedust">대기오염
@@ -255,14 +261,16 @@
 							<input type="checkbox" name="searchKey" value="traffic">교통사고
 						</ol>
 						<ol>
-							<a class="btn btn-success btn-lg" onclick = "recommend()"> <span class="icon_pin_alt">추천</span></a></b>
+							<a class="btn btn-success btn-lg" onclick="recommend()"> <span
+								class="icon_pin_alt">추천</span></a>
+							</b>
 						</ol>
 
 					</div>
-					<br><br>
+					<br> <br>
 					<div class="row">
 						<table id="insAD">
-						
+
 						</table>
 					</div>
 				</div>

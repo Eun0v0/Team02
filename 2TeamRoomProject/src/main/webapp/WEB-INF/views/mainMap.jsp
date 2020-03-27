@@ -185,7 +185,10 @@ alert("로그인안함");
 							class="icon_piechart"></i> <span><b>Charts</b></span>
 					</a></li>
 
-
+					<%
+						String memberId = (String) session.getAttribute("id");
+						if (memberId.equals("manager")) {
+					%>
 					<li class="sub-menu"><a href="javascript:;" class=""> <i
 							class="icon_table"></i> <span><b>Manager Tab </b></span> <span
 							class="menu-arrow arrow_carrot-right"></span>
@@ -195,8 +198,9 @@ alert("로그인안함");
 							<li><a class="" href="insuranceManage"><b>Insurance
 										Table</b></a></li>
 						</ul></li>
-
-
+					<%
+						}
+					%>
 
 				</ul>
 				<!-- sidebar menu end-->
@@ -273,10 +277,11 @@ alert("로그인안함");
 						</ol>
 
 					</div>
-					<br><br>
+					<br>
+					<br>
 					<div class="row">
 						<table id="insAD">
-						
+
 						</table>
 					</div>
 
