@@ -153,7 +153,7 @@ alert("로그인안함");
 					<li class="dropdown" id="btn"><a data-toggle="dropdown"
 						class="dropdown-toggle" href="#"> <span class="profile-ava">
 								<img alt="" src="resources/NiceAdmin/img/avatar1_small2.jpg">
-						</span> <span class="username">Welcome, ${id}!</span> <b class="caret"></b>
+						</span> <span class="username">Welcome ${id}!</span> <b class="caret"></b>
 					</a>
 						<ul class="dropdown-menu extended logout">
 							<div class="log-arrow-up"></div>
@@ -181,7 +181,7 @@ alert("로그인안함");
 					<li class="sub-menu"><a href="recommendMain" class=""> <i
 							class="icon_document_alt"></i> <span><b>Recommend</b></span>
 					</a>
-					<li><a class="" href="chart-chartjs.html"> <i
+					<li><a class="" href="statMain"> <i
 							class="icon_piechart"></i> <span><b>Charts</b></span>
 					</a></li>
 
@@ -217,7 +217,6 @@ alert("로그인안함");
 
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a href="mainMap">Home</a></li>
-							<li><i class="fa fa-laptop"></i>Dashboard</li>
 						</ol>
 					</div>
 				</div>
@@ -233,10 +232,7 @@ alert("로그인안함");
 								</h2>
 								<div class="panel-actions">
 									<a href="mainMap" class="btn-setting"><i
-										class="fa fa-rotate-right"></i></a> <a href="mainMap"
-										class="btn-minimize"><i class="fa fa-chevron-up"></i></a> <a
-										href="mainMap" class="btn-close"><i class="fa fa-times"></i></a>
-								</div>
+										class="fa fa-rotate-right"></i></a></div>
 							</div>
 							<div class="panel-body-map">
 								<div id="map" style="width: 100%; height: 650px;"></div>

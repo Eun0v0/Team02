@@ -59,6 +59,13 @@ public class MapController {
 		return "index";
 	}
 	
+	@RequestMapping(value = "/statMain")
+	public String statMain(Locale locale, Model model) {
+		log.info("statMain");
+		
+		return "statMain";
+	}
+	
 	@RequestMapping(value = "/mainMap", method = RequestMethod.GET)
 	public String mainMap(Locale locale, Model model) {
 		//log.info("Welcome home! The client locale is {}.", locale);

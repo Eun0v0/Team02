@@ -141,7 +141,7 @@
 					<li class="dropdown" id="btn"><a data-toggle="dropdown"
 						class="dropdown-toggle" href="#"> <span class="profile-ava">
 								<img alt="" src="resources/NiceAdmin/img/avatar1_small2.jpg">
-						</span> <span class="username">Welcome, ${id}!</span> <b class="caret"></b>
+						</span> <span class="username">Welcome ${id}!</span> <b class="caret"></b>
 					</a>
 						<ul class="dropdown-menu extended logout">
 							<div class="log-arrow-up"></div>
@@ -169,8 +169,8 @@
 					<li class="sub-menu"><a href="recommendMain" class=""> <i
 							class="icon_document_alt"></i> <span><b>Recommend</b></span>
 					</a>
-					<li><a class="" href="chart-chartjs.html"> <i
-							class="icon_piechart"></i> <span><b>Charts</b></span>
+					<li><a class="" href="statMain"> <i class="icon_piechart"></i>
+							<span><b>Charts</b></span>
 					</a></li>
 
 					<%
@@ -221,10 +221,8 @@
 										( 상위 30%: 초록 / 40~70% : 노랑 / 하위 30%: 빨강 )</strong>
 								</h2>
 								<div class="panel-actions">
-									<a href="mainMap" class="btn-setting"><i
-										class="fa fa-rotate-right"></i></a> <a href="recommendMain"
-										class="btn-minimize"><i class="fa fa-chevron-up"></i></a> <a
-										href="mainMap" class="btn-close"><i class="fa fa-times"></i></a>
+									<a href="recommendMain" class="btn-setting"><i
+										class="fa fa-rotate-right"></i></a>
 								</div>
 							</div>
 							<div class="panel-body-map">
